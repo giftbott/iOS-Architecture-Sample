@@ -1,0 +1,13 @@
+*.DS_Store
+
+build/
+DerivedData/
+
+*.pbxuser
+*.mode1v3
+
+*/xcuserdata
+*.xcuserstate
+!*.xcodeproj/project.pbxproj
+
+*.swp
