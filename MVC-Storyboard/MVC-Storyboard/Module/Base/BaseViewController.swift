@@ -1,0 +1,14 @@
+//
+//  BaseViewController.swift
+//  MVC-Code
+//
+//  Created by giftbot on 2017. 10. 4..
+//  Copyright © 2017년 giftbot. All rights reserved.
+//
+
+import UIKit
+
+class BaseViewController: UIViewController {
+  // Impl. if needed
+}
+
