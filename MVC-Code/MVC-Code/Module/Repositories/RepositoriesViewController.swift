@@ -14,7 +14,7 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
   // MARK: Properties
   
   var v: RepositoriesView!
-  private var tableView: UITableView!
+  private weak var tableView: UITableView!
   
   private let gitHub = GitHubService()
   private var currentSetting = ServiceSetting()

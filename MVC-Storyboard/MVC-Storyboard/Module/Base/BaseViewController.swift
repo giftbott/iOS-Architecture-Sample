@@ -10,5 +10,13 @@ import UIKit
 
 class BaseViewController: UIViewController {
   // Impl. if needed
+  
+  override func didReceiveMemoryWarning() {
+    print("\(self) did Receive Memory Warning")
+  }
+  
+  deinit {
+    print("\(self) has deinitialized")
+  }
 }
 

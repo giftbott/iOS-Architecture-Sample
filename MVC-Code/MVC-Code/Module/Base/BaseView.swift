@@ -13,7 +13,7 @@ class BaseView<T: BaseViewController>: UIView {
 
   // MARK: Properties
   
-  let vc: ViewController
+  weak var vc: ViewController!
   
   // MARK: Initialize
   
@@ -36,21 +36,10 @@ class BaseView<T: BaseViewController>: UIView {
     // Override
   }
   
+  // MARK: Deinit
   
-  // MARK: AutoLayout Constraints
-  
-  private var didSetupConstraints = false
-  
-  override func updateConstraints() {
-    if !self.didSetupConstraints {
-      self.setupConstraints()
-      self.didSetupConstraints = true
-    }
-    super.updateConstraints()
-  }
-
-  func setupConstraints() {
-    // Override
+  deinit {
+    print("\(self) has deinitialized")
   }
 }
 
