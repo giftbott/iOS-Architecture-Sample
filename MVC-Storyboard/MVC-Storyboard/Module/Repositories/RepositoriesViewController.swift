@@ -23,17 +23,21 @@ final class RepositoriesViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupTableView()
+    requestGitHubRepositories()
+  }
+  
+  private func setupTableView() {
     tableView.refreshControl = UIRefreshControl()
     tableView.refreshControl?.tintColor = .mainColor
     tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
     tableView.rowHeight = UITableViewAutomaticDimension
-    tableView.estimatedRowHeight = 90
-    requestGitHubRepositories()
+    tableView.estimatedRowHeight = 80
   }
   
   // MARK: Action
   
-  func refreshData() {
+  @objc private func refreshData() {
     tableView.refreshControl?.beginRefreshing()
     requestGitHubRepositories()
   }
@@ -70,6 +74,7 @@ final class RepositoriesViewController: BaseViewController {
     navigationController?.pushViewController(settingViewController, animated: true)
   }
 }
+
 
 // MARK: - Configure TableView
 

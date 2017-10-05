@@ -24,10 +24,10 @@ final class SettingViewController: BaseViewController {
   
   static func createWith(initialData: ServiceSetting, completion: @escaping (ServiceSetting) -> ()) -> SettingViewController {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let settingViewController = storyboard.instantiateViewController(ofType: SettingViewController.self)
-    settingViewController.currentSetting = initialData
-    settingViewController.saveActionHandler = completion
-    return settingViewController
+    let `self` = storyboard.instantiateViewController(ofType: SettingViewController.self)
+    self.currentSetting = initialData
+    self.saveActionHandler = completion
+    return self
   }
   
   // MARK: Action Handler
@@ -68,6 +68,10 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     guard let headerView = view as? UITableViewHeaderFooterView else { return }
     headerView.textLabel?.textColor = .darkGray
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 40
   }
 }
 

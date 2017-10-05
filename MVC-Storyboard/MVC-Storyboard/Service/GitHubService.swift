@@ -9,9 +9,9 @@
 import Foundation
 
 typealias ServiceSetting = GitHubService.ServiceSetting
-typealias Language = GitHubService.ServiceSetting.Language
-typealias UserID   = GitHubService.ServiceSetting.UserID
-typealias SortType = GitHubService.ServiceSetting.SortType
+typealias Language = ServiceSetting.Language
+typealias UserID   = ServiceSetting.UserID
+typealias SortType = ServiceSetting.SortType
 
 struct GitHubService {
   
