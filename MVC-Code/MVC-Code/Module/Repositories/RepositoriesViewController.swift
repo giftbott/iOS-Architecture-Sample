@@ -38,19 +38,17 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
     gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       
-      switch result {
-      case .success(let repositories):
-        self.repositories = repositories
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
-      case .error(let error):
-        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true)
-      }
       DispatchQueue.main.async {
+        switch result {
+        case .success(let repositories):
+          self.repositories = repositories
+          self.tableView.reloadData()
+        case .error(let error):
+          let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+          let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+          alertController.addAction(okAction)
+          self.present(alertController, animated: true)
+        }
         self.tableView.refreshControl?.endRefreshing()
       }
     }
