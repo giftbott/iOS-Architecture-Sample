@@ -21,9 +21,9 @@ final class RepositoriesTableViewCell: UITableViewCell {
   
   // MARK: Configure Cell
   
-  func configureWith(name: String, description: String, star: Int, fork: Int) {
+  func configureWith(name: String, description: String?, star: Int, fork: Int) {
     nameLabel.text = name
-    descLabel.text = description
+    descLabel.text = description ?? ""
     starLabel.text = String(describing: star)
     forkLabel.text = String(describing: fork)
   }
