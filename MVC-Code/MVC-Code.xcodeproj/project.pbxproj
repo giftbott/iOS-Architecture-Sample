@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		529200671F88B67700279275 /* ServiceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529200661F88B67700279275 /* ServiceSetting.swift */; };
 		52BA4FB21F84F209005F4607 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FB01F84F209005F4607 /* BaseView.swift */; };
 		52BA4FB31F84F209005F4607 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FB11F84F209005F4607 /* BaseViewController.swift */; };
 		52BA4FB71F84F217005F4607 /* RepositoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FB41F84F217005F4607 /* RepositoriesTableViewCell.swift */; };
@@ -24,20 +25,10 @@
 		52E9D8C31F7BD22D00424760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9D8C21F7BD22D00424760 /* AppDelegate.swift */; };
 		52E9D8CA1F7BD22D00424760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52E9D8C91F7BD22D00424760 /* Assets.xcassets */; };
 		52E9D8CD1F7BD22D00424760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52E9D8CB1F7BD22D00424760 /* LaunchScreen.storyboard */; };
-		52E9D8D81F7BD22D00424760 /* MVC_CodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9D8D71F7BD22D00424760 /* MVC_CodeTests.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		52E9D8D41F7BD22D00424760 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52E9D8B71F7BD22D00424760 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52E9D8BE1F7BD22D00424760;
-			remoteInfo = "MVC-Code";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		529200661F88B67700279275 /* ServiceSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceSetting.swift; path = Model/ServiceSetting.swift; sourceTree = "<group>"; };
 		52BA4FB01F84F209005F4607 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseView.swift; path = Module/Base/BaseView.swift; sourceTree = "<group>"; };
 		52BA4FB11F84F209005F4607 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Module/Base/BaseViewController.swift; sourceTree = "<group>"; };
 		52BA4FB41F84F217005F4607 /* RepositoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepositoriesTableViewCell.swift; path = Module/Repositories/RepositoriesTableViewCell.swift; sourceTree = "<group>"; };
@@ -57,20 +48,10 @@
 		52E9D8C91F7BD22D00424760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52E9D8CC1F7BD22D00424760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52E9D8CE1F7BD22D00424760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52E9D8D31F7BD22D00424760 /* MVC-CodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MVC-CodeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52E9D8D71F7BD22D00424760 /* MVC_CodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVC_CodeTests.swift; sourceTree = "<group>"; };
-		52E9D8D91F7BD22D00424760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		52E9D8BC1F7BD22D00424760 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52E9D8D01F7BD22D00424760 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -103,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				52BA4FC61F84F251005F4607 /* Repository.swift */,
+				529200661F88B67700279275 /* ServiceSetting.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -111,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				52E9D8C11F7BD22D00424760 /* MVC-Code */,
-				52E9D8D61F7BD22D00424760 /* MVC-CodeTests */,
 				52E9D8C01F7BD22D00424760 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				52E9D8BF1F7BD22D00424760 /* MVC-Code.app */,
-				52E9D8D31F7BD22D00424760 /* MVC-CodeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,21 +110,12 @@
 			children = (
 				52E9D8C21F7BD22D00424760 /* AppDelegate.swift */,
 				52E9D8E21F7BD24200424760 /* Module */,
-				52E9D8EA1F7BDD4D00424760 /* Service */,
 				52E0D3211F812F1F00A9034F /* Model */,
+				52E9D8EA1F7BDD4D00424760 /* Service */,
 				52E0D31E1F81282100A9034F /* Utility */,
 				52E9D8E31F7BD26600424760 /* Resources */,
 			);
 			path = "MVC-Code";
-			sourceTree = "<group>";
-		};
-		52E9D8D61F7BD22D00424760 /* MVC-CodeTests */ = {
-			isa = PBXGroup;
-			children = (
-				52E9D8D71F7BD22D00424760 /* MVC_CodeTests.swift */,
-				52E9D8D91F7BD22D00424760 /* Info.plist */,
-			);
-			path = "MVC-CodeTests";
 			sourceTree = "<group>";
 		};
 		52E9D8E21F7BD24200424760 /* Module */ = {
@@ -216,24 +187,6 @@
 			productReference = 52E9D8BF1F7BD22D00424760 /* MVC-Code.app */;
 			productType = "com.apple.product-type.application";
 		};
-		52E9D8D21F7BD22D00424760 /* MVC-CodeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52E9D8DF1F7BD22D00424760 /* Build configuration list for PBXNativeTarget "MVC-CodeTests" */;
-			buildPhases = (
-				52E9D8CF1F7BD22D00424760 /* Sources */,
-				52E9D8D01F7BD22D00424760 /* Frameworks */,
-				52E9D8D11F7BD22D00424760 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52E9D8D51F7BD22D00424760 /* PBXTargetDependency */,
-			);
-			name = "MVC-CodeTests";
-			productName = "MVC-CodeTests";
-			productReference = 52E9D8D31F7BD22D00424760 /* MVC-CodeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,18 +194,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = giftbot;
 				TargetAttributes = {
 					52E9D8BE1F7BD22D00424760 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 36346V3588;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
-					};
-					52E9D8D21F7BD22D00424760 = {
-						CreatedOnToolsVersion = 8.3.3;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 52E9D8BE1F7BD22D00424760;
 					};
 				};
 			};
@@ -270,7 +219,6 @@
 			projectRoot = "";
 			targets = (
 				52E9D8BE1F7BD22D00424760 /* MVC-Code */,
-				52E9D8D21F7BD22D00424760 /* MVC-CodeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -282,13 +230,6 @@
 			files = (
 				52E9D8CD1F7BD22D00424760 /* LaunchScreen.storyboard in Resources */,
 				52E9D8CA1F7BD22D00424760 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52E9D8D11F7BD22D00424760 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,27 +254,12 @@
 				52BA4FBD1F84F223005F4607 /* SettingTableViewCell.swift in Sources */,
 				52BA4FB21F84F209005F4607 /* BaseView.swift in Sources */,
 				52BA4FC31F84F248005F4607 /* UIColor+BaseColor.swift in Sources */,
+				529200671F88B67700279275 /* ServiceSetting.swift in Sources */,
 				52BA4FB71F84F217005F4607 /* RepositoriesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52E9D8CF1F7BD22D00424760 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52E9D8D81F7BD22D00424760 /* MVC_CodeTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		52E9D8D51F7BD22D00424760 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52E9D8BE1F7BD22D00424760 /* MVC-Code */;
-			targetProxy = 52E9D8D41F7BD22D00424760 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		52E9D8CB1F7BD22D00424760 /* LaunchScreen.storyboard */ = {
@@ -357,7 +283,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -365,7 +293,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -394,6 +326,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -407,7 +340,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -415,7 +350,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -436,6 +375,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -448,9 +388,10 @@
 				INFOPLIST_FILE = "MVC-Code/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.example.code;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -462,37 +403,10 @@
 				INFOPLIST_FILE = "MVC-Code/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.example.code;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		52E9D8E01F7BD22D00424760 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "MVC-CodeTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kr.giftbot.example.MVC-CodeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVC-Code.app/MVC-Code";
-			};
-			name = Debug;
-		};
-		52E9D8E11F7BD22D00424760 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "MVC-CodeTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kr.giftbot.example.MVC-CodeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVC-Code.app/MVC-Code";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -513,15 +427,6 @@
 			buildConfigurations = (
 				52E9D8DD1F7BD22D00424760 /* Debug */,
 				52E9D8DE1F7BD22D00424760 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52E9D8DF1F7BD22D00424760 /* Build configuration list for PBXNativeTarget "MVC-CodeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52E9D8E01F7BD22D00424760 /* Debug */,
-				52E9D8E11F7BD22D00424760 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

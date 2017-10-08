@@ -11,14 +11,14 @@ import UIKit
 final class SettingViewController: BaseViewController, ViewBindable {
   
   // MARK: Properties
-  var v: SettingView!
+  lazy var v = SettingView(controlBy: self)
   
-  fileprivate let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
-  fileprivate let languages = Language.allValues.map { "\($0)".capitalized }
-  fileprivate let userIDs   = UserID.allValues.map { "\($0)".capitalized }
-  fileprivate let sortTypes = SortType.allValues.map { "\($0)".capitalized }
+  private let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
+  private let languages = Language.allValues.map { "\($0)".capitalized }
+  private let userIDs   = UserID.allValues.map { "\($0)".capitalized }
+  private let sortTypes = SortType.allValues.map { "\($0)".capitalized }
   
-  fileprivate var currentSetting: ServiceSetting
+  private var currentSetting: ServiceSetting
   private var saveActionHandler: (ServiceSetting) -> ()
   
   // MARK: Initialize
@@ -36,12 +36,12 @@ final class SettingViewController: BaseViewController, ViewBindable {
   // MARK: View LifeCycle
   
   override func loadView() {
-    bindView(withViewController: self)
+    view = v
   }
   
   // MARK: Action Handler
   
-  func saveCurrentSetting() {
+  @objc func saveCurrentSetting() {
     saveActionHandler(currentSetting)
     navigationController?.popViewController(animated: true)
   }

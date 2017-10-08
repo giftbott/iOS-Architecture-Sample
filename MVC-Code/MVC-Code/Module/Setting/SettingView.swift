@@ -12,7 +12,7 @@ final class SettingView: BaseView<SettingViewController> {
   
   // MARK: Properties
   
-  let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
+ let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
   
   // MARK: UI Metrics
   

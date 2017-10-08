@@ -10,24 +10,17 @@ import UIKit
 
 protocol ViewBindable: class {
   associatedtype View: UIView
-  var v: View! { get set }
-}
-
-extension ViewBindable where Self: BaseViewController, View: BaseView<BaseViewController> {
-  func bindView(withViewController viewController: BaseViewController) {
-    v = View(controlBy: viewController)
-    view = v
-  }
+  var v: View { get set }
 }
 
 class BaseViewController: UIViewController {
   // Impl. if needed
   
   override func didReceiveMemoryWarning() {
-    print("\(self) did Receive Memory Warning")
+    // print("\(self) did Receive Memory Warning")
   }
   
   deinit {
-    print("\(self) has deinitialized")
+    // print("\(self) has deinitialized")
   }
 }

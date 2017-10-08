@@ -66,7 +66,7 @@ final class RepositoriesTableViewCell: UITableViewCell {
       .leadingAnchor(to: nameLabel.leadingAnchor)
       .trailingAnchor(to: nameLabel.trailingAnchor)
       .activateAnchors()
-    descLabel.setContentHuggingPriority(250, for: UILayoutConstraintAxis.vertical)
+    descLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: UILayoutConstraintAxis.vertical)
     
     starImageView
       .topAnchor(to: descLabel.bottomAnchor, constant: UI.baseMargin)

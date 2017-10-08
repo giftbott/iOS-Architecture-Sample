@@ -12,12 +12,12 @@ final class SettingViewController: BaseViewController {
   
   // MARK: Properties
   
-  fileprivate let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
-  fileprivate let languages = Language.allValues.map { "\($0)".capitalized }
-  fileprivate let userIDs   = UserID.allValues.map { "\($0)".capitalized }
-  fileprivate let sortTypes = SortType.allValues.map { "\($0)".capitalized }
+  private let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
+  private let languages = Language.allValues.map { "\($0)".capitalized }
+  private let userIDs   = UserID.allValues.map { "\($0)".capitalized }
+  private let sortTypes = SortType.allValues.map { "\($0)".capitalized }
   
-  fileprivate var currentSetting: ServiceSetting!
+  private var currentSetting: ServiceSetting!
   private var saveActionHandler: ((ServiceSetting) -> ())!
   
   // MARK: Initialize

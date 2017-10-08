@@ -8,9 +8,7 @@
 
 import UIKit
 
-class BaseView<T: BaseViewController>: UIView {
-  typealias ViewController = T
-
+class BaseView<ViewController: BaseViewController>: UIView {
   // MARK: Properties
   
   weak var vc: ViewController!
@@ -39,7 +37,7 @@ class BaseView<T: BaseViewController>: UIView {
   // MARK: Deinit
   
   deinit {
-    print("\(self) has deinitialized")
+    // print("\(self) has deinitialized")
   }
 }
 

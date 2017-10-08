@@ -13,18 +13,17 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
   
   // MARK: Properties
   
-  var v: RepositoriesView!
+  lazy var v = RepositoriesView(controlBy: self)
   private weak var tableView: UITableView!
   
   private let gitHub = GitHubService()
   private var currentSetting = ServiceSetting()
-  fileprivate var repositories = [Repository]()
-  
+  private var repositories = [Repository]()
   
   // MARK: View LifeCycle
   
   override func loadView() {
-    bindView(withViewController: self)
+    view = v
     tableView = v.tableView
   }
   
@@ -35,13 +34,13 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
   
   // MARK: Action
   
-  func requestGitHubRepositories() {
+  @objc func requestGitHubRepositories() {
     gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       
       switch result {
-      case .success(let json):
-        self.repositories = json.flatMap { Repository(json: $0) }
+      case .success(let repositories):
+        self.repositories = repositories
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }
@@ -51,18 +50,20 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
       }
-      self.tableView.refreshControl?.endRefreshing()
+      DispatchQueue.main.async {
+        self.tableView.refreshControl?.endRefreshing()
+      }
     }
   }
   
-  func refreshData() {
+  @objc func refreshData() {
     tableView.refreshControl?.beginRefreshing()
     requestGitHubRepositories()
   }
   
   // MARK: Navigation
   
-  func editSetting() {
+  @objc func editSetting() {
     let settingVC = SettingViewController(initialData: currentSetting) {
       [weak self] setting in
       self?.currentSetting = setting

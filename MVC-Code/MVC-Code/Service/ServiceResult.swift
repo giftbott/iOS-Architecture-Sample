@@ -14,5 +14,6 @@ enum Result<T> {
 }
 
 enum ServiceError: Error {
+  case urlTransformFailed
   case parseFailed
 }

@@ -17,7 +17,7 @@ final class RepositoriesViewController: BaseViewController {
   
   private let gitHub = GitHubService()
   private var currentSetting = ServiceSetting()
-  fileprivate var repositories = [Repository]()
+  private var repositories = [Repository]()
   
   // MARK: View LifeCycle
   
@@ -31,8 +31,6 @@ final class RepositoriesViewController: BaseViewController {
     tableView.refreshControl = UIRefreshControl()
     tableView.refreshControl?.tintColor = .mainColor
     tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-    tableView.rowHeight = UITableViewAutomaticDimension
-    tableView.estimatedRowHeight = 80
   }
   
   // MARK: Action
@@ -43,13 +41,12 @@ final class RepositoriesViewController: BaseViewController {
   }
   
   @IBAction func requestGitHubRepositories() {
-    gitHub.fetchGitHubRepositories(by: currentSetting) {
-      [weak self] result in
+    gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       
       switch result {
-      case .success(let json):
-        self.repositories = json.flatMap { Repository(json: $0) }
+      case .success(let repositories):
+        self.repositories = repositories
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }
@@ -59,7 +56,9 @@ final class RepositoriesViewController: BaseViewController {
         alertController.addAction(okAction)
         self.present(alertController, animated: true)
       }
-      self.tableView.refreshControl?.endRefreshing()
+      DispatchQueue.main.async {
+        self.tableView.refreshControl?.endRefreshing()
+      }
     }
   }
   

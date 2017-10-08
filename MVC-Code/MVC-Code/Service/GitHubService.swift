@@ -8,33 +8,9 @@
 
 import Foundation
 
-typealias ServiceSetting = GitHubService.ServiceSetting
-typealias Language = GitHubService.ServiceSetting.Language
-typealias UserID   = GitHubService.ServiceSetting.UserID
-typealias SortType = GitHubService.ServiceSetting.SortType
-
 struct GitHubService {
   
   // MARK: Properties
-  
-  struct ServiceSetting {
-    var language = Language.swift
-    var userID   = UserID.all
-    var sortType = SortType.stars
-    
-    enum Language {
-      case swift, objc, java, kotlin, python
-      static let allValues: [Language] = [.swift, .objc, .java, .kotlin, .python]
-    }
-    enum UserID {
-      case all, giftbott
-      static let allValues: [UserID] = [.all, .giftbott]
-    }
-    enum SortType {
-      case stars, forks, updated
-      static let allValues: [SortType] = [.stars, .forks, .updated]
-    }
-  }
   
   private var session: URLSession { return URLSession.shared }
   
@@ -42,31 +18,30 @@ struct GitHubService {
   
   func fetchGitHubRepositories(
     by setting: ServiceSetting,
-    completion: @escaping (Result<[[String: Any]]>) -> ()
+    completion: @escaping (Result<[Repository]>) -> ()
   ) {
     let baseUrl  = "https://api.github.com/search/repositories?q="
     let language = "language:\(setting.language)"
     let userID   = setting.userID == .all ? "" : "+user:\(setting.userID)"
     let sortType = "&sort=\(setting.sortType)"
     
-    guard let url = URL(string: baseUrl + language + userID + sortType) else { return }
+    guard let url = URL(string: baseUrl + language + userID + sortType) else {
+      completion(.error(ServiceError.urlTransformFailed))
+      return
+    }
     
     let dataTask = session.dataTask(with: url) { (data, response, error) in
-      if let error = error {
+      if let error = error, data == nil {
         completion(.error(error))
         return
       }
-      
-      guard let data = data,
-        let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
-        let json = jsonObject as? [String: Any],
-        let items = json["items"] as? [[String: Any]]
-      else {
-        completion(.error(ServiceError.parseFailed))
-        return
+    
+      do {
+        let repositories = try JSONDecoder().decode(Repositories.self, from: data!)
+        completion(.success(repositories.items))
+      } catch let error {
+        completion(.error(error))
       }
-      
-      completion(.success(items))
     }
     
     dataTask.resume()
