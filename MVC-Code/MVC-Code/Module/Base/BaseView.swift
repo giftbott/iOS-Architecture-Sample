@@ -9,6 +9,7 @@
 import UIKit
 
 class BaseView<ViewController: BaseViewController>: UIView {
+  
   // MARK: Properties
   
   weak var vc: ViewController!

@@ -112,6 +112,11 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="rMF-Dp-pdS"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3R2-C4-J7M">
+                                <rect key="frame" x="170" y="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -124,7 +129,7 @@
                     <navigationItem key="navigationItem" title="Repository List" id="Kov-Pq-iRK">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="upU-sj-ONk">
                             <connections>
-                                <action selector="requestGitHubRepositories" destination="BYZ-38-t0r" id="66S-qm-bzh"/>
+                                <action selector="reloadData" destination="BYZ-38-t0r" id="ROV-1g-LnQ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="btn_setting" id="afd-vQ-g1I">
@@ -134,6 +139,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="indicatorView" destination="3R2-C4-J7M" id="vZS-Zy-K6N"/>
                         <outlet property="tableView" destination="YdV-tg-1j2" id="CWg-GO-5I6"/>
                     </connections>
                 </viewController>

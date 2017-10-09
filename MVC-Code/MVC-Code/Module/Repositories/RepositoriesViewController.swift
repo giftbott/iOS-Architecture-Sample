@@ -14,58 +14,69 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
   // MARK: Properties
   
   lazy var v = RepositoriesView(controlBy: self)
-  private weak var tableView: UITableView!
   
   private let gitHub = GitHubService()
-  private var currentSetting = ServiceSetting()
+  private var currentSetting = ServiceSetting.decode()
   private var repositories = [Repository]()
+  
+  //  Set these properties on loadView method if needed
+  //  private weak var tableView: UITableView!
+  //  private weak var indicatorView: UIActivityIndicatorView!
   
   // MARK: View LifeCycle
   
   override func loadView() {
     view = v
-    tableView = v.tableView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    requestGitHubRepositories()
+    reloadData()
   }
   
   // MARK: Action
   
-  @objc func requestGitHubRepositories() {
+  @objc func pullToRefresh() {
+    requestGitHubRepositories()
+  }
+  
+  @objc func reloadData() {
+    v.indicatorView.startAnimating()
+    requestGitHubRepositories()
+  }
+  
+  private func requestGitHubRepositories() {
     gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
-      
       DispatchQueue.main.async {
         switch result {
         case .success(let repositories):
           self.repositories = repositories
-          self.tableView.reloadData()
+          self.v.tableView.reloadData()
         case .error(let error):
           let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
           let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
           alertController.addAction(okAction)
           self.present(alertController, animated: true)
         }
-        self.tableView.refreshControl?.endRefreshing()
+        self.stopNetworking()
       }
     }
   }
   
-  @objc func refreshData() {
-    tableView.refreshControl?.beginRefreshing()
-    requestGitHubRepositories()
+  private func stopNetworking() {
+    v.indicatorView.stopAnimating()
+    v.tableView.refreshControl?.endRefreshing()
   }
   
   // MARK: Navigation
   
   @objc func editSetting() {
-    let settingVC = SettingViewController(initialData: currentSetting) {
-      [weak self] setting in
-      self?.currentSetting = setting
-      self?.requestGitHubRepositories()
+    let settingVC = SettingViewController(initialData: currentSetting) { [weak self] setting in
+      guard let `self` = self, self.currentSetting != setting else { return }
+      self.currentSetting = setting
+      self.currentSetting.encoded()
+      self.reloadData()
     }
     navigationController?.pushViewController(settingVC, animated: true)
   }

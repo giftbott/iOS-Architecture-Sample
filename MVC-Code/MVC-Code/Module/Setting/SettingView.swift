@@ -25,16 +25,13 @@ final class SettingView: BaseView<SettingViewController> {
   // MARK: Initialize
   
   override func setupUI() {
-    // navigation
     vc.navigationItem.title = "Setting"
     
-    // tableView
     tableView.separatorColor = tableView.backgroundColor
     tableView.rowHeight = UI.tableViewRowHeight
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
     tableView.allowsMultipleSelection = true
-    tableView.register(SettingTableViewCell.self,
-                       forCellReuseIdentifier: "\(SettingTableViewCell.self)")
+    tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     addSubview(tableView)
   }
 

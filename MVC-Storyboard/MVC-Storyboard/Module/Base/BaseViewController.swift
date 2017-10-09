@@ -9,7 +9,15 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-  // Impl. if needed
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
+  }
+  
+  func setupUI() {
+    // Override
+  }
   
   override func didReceiveMemoryWarning() {
     // print("\(self) did Receive Memory Warning")

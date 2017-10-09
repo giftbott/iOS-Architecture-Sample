@@ -14,33 +14,34 @@ final class RepositoriesViewController: BaseViewController {
   // MARK: Properties
   
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var indicatorView: UIActivityIndicatorView!
   
   private let gitHub = GitHubService()
-  private var currentSetting = ServiceSetting()
+  private var currentSetting = ServiceSetting.decode()
   private var repositories = [Repository]()
   
   // MARK: View LifeCycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupTableView()
-    requestGitHubRepositories()
+    reloadData()
   }
   
-  private func setupTableView() {
-    tableView.refreshControl = UIRefreshControl()
-    tableView.refreshControl?.tintColor = .mainColor
-    tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+  override func setupUI() {
+    let refreshControl = UIRefreshControl()
+    refreshControl.tintColor = .mainColor
+    refreshControl.addTarget(self, action: #selector(requestGitHubRepositories), for: .valueChanged)
+    tableView.refreshControl = refreshControl
   }
   
   // MARK: Action
   
-  @objc private func refreshData() {
-    tableView.refreshControl?.beginRefreshing()
+  @IBAction func reloadData() {
+    indicatorView.startAnimating()
     requestGitHubRepositories()
   }
   
-  @IBAction func requestGitHubRepositories() {
+  @objc private func requestGitHubRepositories() {
     gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       DispatchQueue.main.async {
@@ -54,20 +55,27 @@ final class RepositoriesViewController: BaseViewController {
           alertController.addAction(okAction)
           self.present(alertController, animated: true)
         }
-        self.tableView.refreshControl?.endRefreshing()
+        self.stopNetworking()
       }
     }
+  }
+  
+  private func stopNetworking() {
+    indicatorView.stopAnimating()
+    tableView.refreshControl?.endRefreshing()
   }
   
   // MARK: Navigation
   
   @IBAction func editSetting() {
-    let settingViewController = SettingViewController.createWith(initialData: currentSetting) {
+    let settingVC = SettingViewController.createWith(initialData: currentSetting) {
       [weak self] setting in
-      self?.currentSetting = setting
-      self?.requestGitHubRepositories()
+      guard let `self` = self, self.currentSetting != setting else { return }
+      self.currentSetting = setting
+      self.currentSetting.encoded()
+      self.reloadData()
     }
-    navigationController?.pushViewController(settingViewController, animated: true)
+    navigationController?.pushViewController(settingVC, animated: true)
   }
 }
 

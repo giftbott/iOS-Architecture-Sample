@@ -11,6 +11,7 @@ import UIKit
 final class SettingViewController: BaseViewController, ViewBindable {
   
   // MARK: Properties
+  
   lazy var v = SettingView(controlBy: self)
   
   private let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]

@@ -14,8 +14,6 @@ protocol ViewBindable: class {
 }
 
 class BaseViewController: UIViewController {
-  // Impl. if needed
-  
   override func didReceiveMemoryWarning() {
     // print("\(self) did Receive Memory Warning")
   }

@@ -13,6 +13,7 @@ final class RepositoriesView: BaseView<RepositoriesViewController> {
   // MARK: Properties
 		
   let tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
+  let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
   
   // MARK: UI Metrics
   
@@ -24,10 +25,8 @@ final class RepositoriesView: BaseView<RepositoriesViewController> {
   // MARK: Setup
   
   override func setupUI() {
-    // navigation
     vc.navigationItem.title = "Repository List"
     
-    // tableView
     tableView.refreshControl = UIRefreshControl()
     tableView.refreshControl?.tintColor = .mainColor
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -36,16 +35,20 @@ final class RepositoriesView: BaseView<RepositoriesViewController> {
     tableView.separatorInset = UIEdgeInsetsMake(0, UI.baseMargin, 0, UI.baseMargin)
     tableView.register(RepositoriesTableViewCell.self,
                        forCellReuseIdentifier: RepositoriesTableViewCell.identifier)
-    addSubview(tableView)
+    
+    indicatorView.color = .mainColor
+    indicatorView.center = center
+    
+    addSubviews([tableView, indicatorView])
   }
   
   override func setupBinding() {
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: vc, action: #selector(vc.requestGitHubRepositories))
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: vc, action: #selector(vc.reloadData))
     vc.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: vc, action: #selector(vc.editSetting))
     
     tableView.delegate = vc
     tableView.dataSource = vc
-    tableView.refreshControl?.addTarget(vc, action: #selector(vc.refreshData), for: .valueChanged)
+    tableView.refreshControl?.addTarget(vc, action: #selector(vc.pullToRefresh), for: .valueChanged)
   }
   
 }
