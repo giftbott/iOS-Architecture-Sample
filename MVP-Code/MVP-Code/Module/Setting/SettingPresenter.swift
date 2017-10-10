@@ -10,9 +10,7 @@ import Foundation
 
 // MARK: - Protocol
 
-typealias SettingPresenterType = SettingPresenterNonObjcType & SettingPresenterObjcType
-
-protocol SettingPresenterNonObjcType: class, BasePresenterType {
+protocol SettingPresenterType: class, BasePresenterType {
   weak var view: SettingViewType! { get set }
   var sectionHeaders: [String] { get }
   
@@ -20,8 +18,6 @@ protocol SettingPresenterNonObjcType: class, BasePresenterType {
   func willSelectTableViewRow(at indexPath: IndexPath, selectedRows: [IndexPath]?) -> IndexPath?
   func numberOfRows(in section: Int) -> Int
   func cellForTableViewRow(at indexPath: IndexPath) -> String
-}
-@objc protocol SettingPresenterObjcType: class {
   func saveCurrentSetting()
 }
 
@@ -58,7 +54,7 @@ extension SettingPresenter: SettingPresenterType {
     view.exit(animated: true)
   }
   
-  // MARK: TableView Delegate & DataSource
+  // MARK: TableView Delegate & DataSource Handler
   
   func didSelectTableViewRow(at indexPath: IndexPath) {
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {

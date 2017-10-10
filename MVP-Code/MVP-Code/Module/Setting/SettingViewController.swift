@@ -67,9 +67,15 @@ final class SettingViewController: BaseViewController {
     tableView.dataSource = self
     
     let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                        target: presenter,
-                                        action: #selector(presenter.saveCurrentSetting))
+                                        target: self,
+                                        action: #selector(didTapSaveBarButton))
     navigationItem.rightBarButtonItem = saveBarButton
+  }
+  
+  // MARK: Target Action
+  
+  @objc func didTapSaveBarButton() {
+    presenter.saveCurrentSetting()
   }
 }
 

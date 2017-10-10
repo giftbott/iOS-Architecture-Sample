@@ -10,19 +10,15 @@ import Foundation
 
 // MARK: - Protocol
 
-typealias RepositoriesPresenterType = RepositoriesPresenterNonObjcType & RepositoriesPresenterObjcType
-
-protocol RepositoriesPresenterNonObjcType: class, BasePresenterType {
+protocol RepositoriesPresenterType: class, BasePresenterType {
   weak var view: RepositoriesViewType! { get set }
   var repositories: [Repository] { get }
+  
   func didSelectTableViewRowAt(indexPath: IndexPath)
-}
-@objc protocol RepositoriesPresenterObjcType: class {
   func editSetting()
   func pullToRefresh()
   func reloadData()
 }
-
 
 // MARK: - Class Implementation
 
