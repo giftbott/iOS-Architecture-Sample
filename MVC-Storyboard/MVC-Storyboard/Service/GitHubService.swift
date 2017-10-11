@@ -21,8 +21,8 @@ struct GitHubService {
     completion: @escaping (Result<[Repository]>) -> ()
     ) {
     let baseUrl  = "https://api.github.com/search/repositories?q="
-    let language = "language:\(setting.language)"
-    let userID   = setting.userID == .all ? "" : "+user:\(setting.userID)"
+    let language = "language=\(setting.language)"
+    let userID   = setting.userID == .all ? "" : "&user=\(setting.userID)"
     let sortType = "&sort=\(setting.sortType)"
     
     guard let url = URL(string: baseUrl + language + userID + sortType) else {
