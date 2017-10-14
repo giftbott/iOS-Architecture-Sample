@@ -22,6 +22,7 @@
 		52BA4FC71F84F251005F4607 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FC61F84F251005F4607 /* Repository.swift */; };
 		52BA4FCA1F84F25D005F4607 /* GitHubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FC81F84F25D005F4607 /* GitHubService.swift */; };
 		52BA4FCB1F84F25D005F4607 /* ServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FC91F84F25D005F4607 /* ServiceResult.swift */; };
+		52CAE8531F91977F0034A770 /* GitHubServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CAE8521F91977F0034A770 /* GitHubServiceType.swift */; };
 		52E9D8C31F7BD22D00424760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9D8C21F7BD22D00424760 /* AppDelegate.swift */; };
 		52E9D8CA1F7BD22D00424760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52E9D8C91F7BD22D00424760 /* Assets.xcassets */; };
 		52E9D8CD1F7BD22D00424760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52E9D8CB1F7BD22D00424760 /* LaunchScreen.storyboard */; };
@@ -43,6 +44,7 @@
 		52BA4FC61F84F251005F4607 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repository.swift; path = Model/Repository.swift; sourceTree = "<group>"; };
 		52BA4FC81F84F25D005F4607 /* GitHubService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GitHubService.swift; path = Service/GitHubService.swift; sourceTree = "<group>"; };
 		52BA4FC91F84F25D005F4607 /* ServiceResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceResult.swift; path = Service/ServiceResult.swift; sourceTree = "<group>"; };
+		52CAE8521F91977F0034A770 /* GitHubServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GitHubServiceType.swift; path = Service/GitHubServiceType.swift; sourceTree = "<group>"; };
 		52E9D8BF1F7BD22D00424760 /* MVC-Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVC-Code.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E9D8C21F7BD22D00424760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52E9D8C91F7BD22D00424760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		52E9D8EA1F7BDD4D00424760 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				52CAE8521F91977F0034A770 /* GitHubServiceType.swift */,
 				52BA4FC81F84F25D005F4607 /* GitHubService.swift */,
 				52BA4FC91F84F25D005F4607 /* ServiceResult.swift */,
 			);
@@ -242,6 +245,7 @@
 			files = (
 				52BA4FC51F84F248005F4607 /* UIView+SubView.swift in Sources */,
 				52BA4FB81F84F217005F4607 /* RepositoriesView.swift in Sources */,
+				52CAE8531F91977F0034A770 /* GitHubServiceType.swift in Sources */,
 				52BA4FC71F84F251005F4607 /* Repository.swift in Sources */,
 				52BA4FC41F84F248005F4607 /* UIView+LayoutAnchor.swift in Sources */,
 				52BA4FB91F84F217005F4607 /* RepositoriesViewController.swift in Sources */,

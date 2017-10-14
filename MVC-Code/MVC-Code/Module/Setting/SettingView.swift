@@ -12,7 +12,7 @@ final class SettingView: BaseView<SettingViewController> {
   
   // MARK: Properties
   
- let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
+  let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
   
   // MARK: UI Metrics
   
@@ -34,7 +34,7 @@ final class SettingView: BaseView<SettingViewController> {
     tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     addSubview(tableView)
   }
-
+  
   override func setupBinding() {
     tableView.delegate = vc
     tableView.dataSource = vc

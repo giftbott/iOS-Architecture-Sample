@@ -12,6 +12,8 @@ final class RepositoriesTableViewCell: UITableViewCell {
   
   // MARK: - Properties
   
+  static let identifier = String(describing: RepositoriesTableViewCell.self)
+  
   private let nameLabel = UILabel()
   private let descLabel = UILabel()
   private let starImageView = UIImageView(image: #imageLiteral(resourceName: "img_star"))
@@ -19,7 +21,13 @@ final class RepositoriesTableViewCell: UITableViewCell {
   private let forkImageView = UIImageView(image: #imageLiteral(resourceName: "img_fork"))
   private let forkLabel = UILabel()
   
-  static let identifier = String(describing: RepositoriesTableViewCell.self)
+  // MARK: - UI Metrics
+  
+  private struct UI {
+    static let baseMargin = CGFloat(8)
+    static let imageSize = CGSize(width: 15, height: 15)
+    static let countLabelSize = CGSize(width: 50, height: UI.imageSize.height)
+  }
   
   // MARK: - Initialize
   
@@ -31,13 +39,6 @@ final class RepositoriesTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupUI()
     setupConstraints()
-  }
-  
-  // UI Metrics
-  private struct UI {
-    static let baseMargin = CGFloat(8)
-    static let imageSize = CGSize(width: 15, height: 15)
-    static let countLabelSize = CGSize(width: 50, height: UI.imageSize.height)
   }
   
   private func setupUI() {

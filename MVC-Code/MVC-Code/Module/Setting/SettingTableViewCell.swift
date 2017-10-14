@@ -40,6 +40,8 @@ final class SettingTableViewCell: UITableViewCell {
     }
   }
   
+  // MARK: Cell Contents
+  
   func setTitleText(_ title: String) {
     textLabel?.text = title
   }

@@ -8,8 +8,12 @@
 
 import UIKit
 
-final class SettingViewController: BaseViewController, ViewBindable {
+final class SettingViewController: BaseViewController {
   
+  typealias Language = ServiceSetting.Language
+  typealias UserID   = ServiceSetting.UserID
+  typealias SortType = ServiceSetting.SortType
+
   // MARK: Properties
   
   lazy var v = SettingView(controlBy: self)
@@ -27,7 +31,7 @@ final class SettingViewController: BaseViewController, ViewBindable {
   init(initialData: ServiceSetting, completion: @escaping (ServiceSetting) -> ()) {
     currentSetting = initialData
     saveActionHandler = completion
-    super.init(nibName: nil, bundle: nil)
+    super.init()
   }
   
   required init?(coder aDecoder: NSCoder) {

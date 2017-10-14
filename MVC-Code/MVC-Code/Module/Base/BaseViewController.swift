@@ -8,15 +8,22 @@
 
 import UIKit
 
-protocol ViewBindable: class {
-  associatedtype View: UIView
-  var v: View { get set }
+protocol ViewControllerType: class {
 }
 
-class BaseViewController: UIViewController {
-  override func didReceiveMemoryWarning() {
-    // print("\(self) did Receive Memory Warning")
+class BaseViewController: UIViewController, ViewControllerType {
+  
+  // MARK: Initialize
+  
+  init() {
+    super.init(nibName: nil, bundle: nil)
   }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: Deinit
   
   deinit {
     // print("\(self) has deinitialized")

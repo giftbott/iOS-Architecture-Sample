@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func setupKeyWindow() {
     window = UIWindow(frame: UIScreen.main.bounds)
-    let repositoriesViewController = RepositoriesViewController()
-    let navigationController = UINavigationController(rootViewController: repositoriesViewController)
-    window?.rootViewController = navigationController
+    let serviceSetting = ServiceSetting.decode()
+    let repositoriesViewController = RepositoriesViewController(serviceSetting: serviceSetting)
+    window?.rootViewController = UINavigationController(rootViewController: repositoriesViewController)
     window?.makeKeyAndVisible()
   }
 }

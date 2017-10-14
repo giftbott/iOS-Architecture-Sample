@@ -9,19 +9,31 @@
 import UIKit
 import SafariServices
 
-final class RepositoriesViewController: BaseViewController, ViewBindable {
+final class RepositoriesViewController: BaseViewController {
   
   // MARK: Properties
   
   lazy var v = RepositoriesView(controlBy: self)
   
-  private let gitHub = GitHubService()
-  private var currentSetting = ServiceSetting.decode()
+  private let gitHubService: GitHubServiceType
+  private var currentSetting: ServiceSetting
   private var repositories = [Repository]()
   
   //  Set these properties on loadView method if needed
   //  private weak var tableView: UITableView!
   //  private weak var indicatorView: UIActivityIndicatorView!
+  
+  // MARK: Initialize
+  
+  init(service: GitHubServiceType = GitHubService(), serviceSetting: ServiceSetting) {
+    gitHubService = service
+    currentSetting = serviceSetting
+    super.init()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   // MARK: View LifeCycle
   
@@ -46,7 +58,7 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
   }
   
   private func requestGitHubRepositories() {
-    gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
+    gitHubService.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       DispatchQueue.main.async {
         switch result {
@@ -82,7 +94,7 @@ final class RepositoriesViewController: BaseViewController, ViewBindable {
   }
 }
 
-// MARK: - Configure TableView
+// MARK: - TableViewDelegate
 
 extension RepositoriesViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -93,6 +105,8 @@ extension RepositoriesViewController: UITableViewDelegate {
     navigationController?.pushViewController(safariViewController, animated: true)
   }
 }
+
+// MARK: - TableViewDataSource
 
 extension RepositoriesViewController: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {

@@ -8,7 +8,13 @@
 
 import UIKit
 
-class BaseView<ViewController: BaseViewController>: UIView {
+protocol ViewType: class {
+  associatedtype ViewController: ViewControllerType
+  weak var vc: ViewController! { get }
+  init(controlBy viewController: ViewController)
+}
+
+class BaseView<ViewController: ViewControllerType>: UIView, ViewType {
   
   // MARK: Properties
   
