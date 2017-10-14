@@ -11,10 +11,12 @@ import SafariServices
 
 // MARK: - Protocol
 
-protocol RepositoriesViewType: BaseViewType {
+protocol RepositoriesViewType: ViewType {
   func presentAlert(title: String, message: String)
+  // Navigation
   func show(_ viewController: UIViewController, animated: Bool)
   func showRepository(by url: URL)
+  // Networking
   func startNetworking()
   func stopNetworking()
 }
@@ -148,18 +150,13 @@ extension RepositoriesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return presenter.repositories.count
+    return presenter.numberOfRows(in: section)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let reuseId = String(describing: RepositoriesTableViewCell.self)
+    let reuseId = RepositoriesTableViewCell.identifier
     let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as! RepositoriesTableViewCell
-    
-    let repository = presenter.repositories[indexPath.row]
-    cell.configureWith(name: repository.fullName,
-                       description: repository.description,
-                       star: repository.starCount,
-                       fork: repository.forkCount)
+    presenter.configureCell(cell, forRowAt: indexPath)
     return cell
   }
 }

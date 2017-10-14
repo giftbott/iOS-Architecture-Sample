@@ -22,8 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     let repositoriesPresenter = RepositoriesPresenter(serviceSetting: ServiceSetting.decode())
     let repositoriesViewController = RepositoriesViewController(presenter: repositoriesPresenter)
-    let navigationController = UINavigationController(rootViewController: repositoriesViewController)
-    window?.rootViewController = navigationController
+    window?.rootViewController = UINavigationController(rootViewController: repositoriesViewController)
     window?.makeKeyAndVisible()
   }
 }

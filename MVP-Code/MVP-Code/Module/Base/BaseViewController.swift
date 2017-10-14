@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - BaseView Protocol
 
-protocol BaseViewType: class {
+protocol ViewType: class {
 }
 
 // MARK: - BaseView Controller
@@ -43,4 +43,3 @@ class BaseViewController: UIViewController {
     // print("\(self) has deinitialized")
   }
 }
-

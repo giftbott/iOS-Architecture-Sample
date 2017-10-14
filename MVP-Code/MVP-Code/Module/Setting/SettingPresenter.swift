@@ -10,14 +10,14 @@ import Foundation
 
 // MARK: - Protocol
 
-protocol SettingPresenterType: class, BasePresenterType {
+protocol SettingPresenterType: class, PresenterType {
   weak var view: SettingViewType! { get set }
   var sectionHeaders: [String] { get }
   
   func didSelectTableViewRow(at indexPath: IndexPath)
   func willSelectTableViewRow(at indexPath: IndexPath, selectedRows: [IndexPath]?) -> IndexPath?
   func numberOfRows(in section: Int) -> Int
-  func cellForTableViewRow(at indexPath: IndexPath) -> String
+  func configureCell(_ cell: SettingCellType, forRowAt indexPath: IndexPath)
   func saveCurrentSetting()
 }
 
@@ -25,11 +25,17 @@ protocol SettingPresenterType: class, BasePresenterType {
 
 final class SettingPresenter {
   
+  typealias Language = ServiceSetting.Language
+  typealias UserID   = ServiceSetting.UserID
+  typealias SortType = ServiceSetting.SortType
+  
   // MARK: Properties
   
+  // protocol
   weak var view: SettingViewType!
-  
   let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
+  
+  // private
   private let languages = Language.allValues.map { "\($0)".capitalized }
   private let userIDs   = UserID.allValues.map { "\($0)".capitalized }
   private let sortTypes = SortType.allValues.map { "\($0)".capitalized }
@@ -54,7 +60,7 @@ extension SettingPresenter: SettingPresenterType {
     view.exit(animated: true)
   }
   
-  // MARK: TableView Delegate & DataSource Handler
+  // MARK: TableView Handler
   
   func didSelectTableViewRow(at indexPath: IndexPath) {
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
@@ -87,9 +93,8 @@ extension SettingPresenter: SettingPresenterType {
     }
   }
   
-  func cellForTableViewRow(at indexPath: IndexPath) -> String {
+  func configureCell(_ cell: SettingCellType, forRowAt indexPath: IndexPath) {
     let title: String
-    
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
       title = languages[indexPath.row]
       if title == "\(currentSetting.language)".capitalized {
@@ -106,6 +111,6 @@ extension SettingPresenter: SettingPresenterType {
         view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
       }
     }
-    return title
+    cell.setTitleText(title)
   }
 }

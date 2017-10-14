@@ -22,6 +22,7 @@
 		528B19CF1F86B3FF0030A047 /* UIColor+BaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528B19BE1F86B3FF0030A047 /* UIColor+BaseColor.swift */; };
 		528B19D01F86B3FF0030A047 /* UIView+LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528B19BF1F86B3FF0030A047 /* UIView+LayoutAnchor.swift */; };
 		528B19D11F86B3FF0030A047 /* UIView+SubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528B19C01F86B3FF0030A047 /* UIView+SubView.swift */; };
+		52CAE8511F918A200034A770 /* GitHubServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CAE8501F918A200034A770 /* GitHubServiceType.swift */; };
 		52D8DA1A1F86B37600BB1575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DA191F86B37600BB1575 /* AppDelegate.swift */; };
 		52D8DA3A1F86B4A400BB1575 /* RepositoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DA391F86B4A400BB1575 /* RepositoriesPresenter.swift */; };
 		52DD66A01F8A04BC00A43500 /* ServiceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD669F1F8A04BC00A43500 /* ServiceSetting.swift */; };
@@ -44,8 +45,7 @@
 		528B19BE1F86B3FF0030A047 /* UIColor+BaseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BaseColor.swift"; sourceTree = "<group>"; };
 		528B19BF1F86B3FF0030A047 /* UIView+LayoutAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutAnchor.swift"; sourceTree = "<group>"; };
 		528B19C01F86B3FF0030A047 /* UIView+SubView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SubView.swift"; sourceTree = "<group>"; };
-		5292006C1F89FAD400279275 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = ../Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		5292006D1F89FAD400279275 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = ../Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		52CAE8501F918A200034A770 /* GitHubServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubServiceType.swift; sourceTree = "<group>"; };
 		52D8DA161F86B37600BB1575 /* MVP-Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVP-Code.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D8DA191F86B37600BB1575 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D8DA391F86B4A400BB1575 /* RepositoriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesPresenter.swift; sourceTree = "<group>"; };
@@ -105,6 +105,7 @@
 		528B19B31F86B3FF0030A047 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				52CAE8501F918A200034A770 /* GitHubServiceType.swift */,
 				528B19B41F86B3FF0030A047 /* GitHubService.swift */,
 				528B19B51F86B3FF0030A047 /* ServiceResult.swift */,
 			);
@@ -140,21 +141,11 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		5292006B1F89FAD300279275 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5292006C1F89FAD400279275 /* RxCocoa.framework */,
-				5292006D1F89FAD400279275 /* RxSwift.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		52D8DA0D1F86B37500BB1575 = {
 			isa = PBXGroup;
 			children = (
 				52D8DA181F86B37600BB1575 /* MVP-Code */,
 				52D8DA171F86B37600BB1575 /* Products */,
-				5292006B1F89FAD300279275 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,6 +244,7 @@
 			files = (
 				528B19D11F86B3FF0030A047 /* UIView+SubView.swift in Sources */,
 				528B19C91F86B3FF0030A047 /* GitHubService.swift in Sources */,
+				52CAE8511F918A200034A770 /* GitHubServiceType.swift in Sources */,
 				528B19D01F86B3FF0030A047 /* UIView+LayoutAnchor.swift in Sources */,
 				52D8DA1A1F86B37600BB1575 /* AppDelegate.swift in Sources */,
 				527CE1A61F8A856400E6C92D /* SettingPresenter.swift in Sources */,

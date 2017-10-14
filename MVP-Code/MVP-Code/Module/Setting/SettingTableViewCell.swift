@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class SettingTableViewCell: UITableViewCell {
+protocol SettingCellType {
+  func setTitleText(_ title: String)
+}
+
+final class SettingTableViewCell: UITableViewCell, SettingCellType {
   
   // MARK: - Properties
   

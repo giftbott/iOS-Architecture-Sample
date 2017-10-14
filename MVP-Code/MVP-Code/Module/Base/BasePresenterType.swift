@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol BasePresenterType: class {
+protocol PresenterType: class {
   func onViewDidLoad()
 }
 
-extension BasePresenterType {
+extension PresenterType {
   func onViewDidLoad() { }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Protocol
 
-protocol SettingViewType: BaseViewType {
+protocol SettingViewType: ViewType {
   func exit(animated: Bool)
   func determineTalbeViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool)
 }
@@ -135,8 +135,7 @@ extension SettingViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
-    let title = presenter.cellForTableViewRow(at: indexPath)
-    cell.setTitleText(title)
+    presenter.configureCell(cell, forRowAt: indexPath)
     return cell
   }
   

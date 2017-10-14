@@ -10,14 +10,17 @@ import Foundation
 
 // MARK: - Protocol
 
-protocol RepositoriesPresenterType: class, BasePresenterType {
+protocol RepositoriesPresenterType: class, PresenterType {
   weak var view: RepositoriesViewType! { get set }
-  var repositories: [Repository] { get }
   
-  func didSelectTableViewRowAt(indexPath: IndexPath)
-  func editSetting()
   func pullToRefresh()
   func reloadData()
+  // TableView
+  func configureCell(_ cell: RepositoriesCellType, forRowAt indexPath: IndexPath)
+  func didSelectTableViewRowAt(indexPath: IndexPath)
+  func numberOfRows(in section: Int) -> Int
+  // Navigation
+  func editSetting()
 }
 
 // MARK: - Class Implementation
@@ -27,15 +30,15 @@ final class RepositoriesPresenter {
   // MARK: Properties
   
   weak var view: RepositoriesViewType!
-  var repositories = [Repository]()
   
-  private let gitHub: GitHubService
+  private let gitHubService: GitHubServiceType
   private var currentSetting: ServiceSetting
+  private var repositories = [Repository]()
   
   // MARK: Initialize
   
-  init(service: GitHubService = GitHubService(), serviceSetting: ServiceSetting = ServiceSetting()) {
-    gitHub = service
+  init(service: GitHubServiceType = GitHubService(), serviceSetting: ServiceSetting) {
+    gitHubService = service
     currentSetting = serviceSetting
   }
   
@@ -48,7 +51,7 @@ final class RepositoriesPresenter {
   // MARK: Action
   
   private func requestGitHubRepositories() {
-    gitHub.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
+    gitHubService.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       DispatchQueue.main.async {
         switch result {
@@ -76,13 +79,27 @@ extension RepositoriesPresenter: RepositoriesPresenterType {
     requestGitHubRepositories()
   }
   
-  // Navigation
+  // MARK: TableView
   
   func didSelectTableViewRowAt(indexPath: IndexPath) {
     let repository = repositories[indexPath.row]
     guard let url = URL(string: repository.url) else { return }
     view.showRepository(by: url)
   }
+  
+  func numberOfRows(in section: Int) -> Int {
+    return repositories.count
+  }
+  
+  func configureCell(_ cell: RepositoriesCellType, forRowAt indexPath: IndexPath) {
+    let repository = repositories[indexPath.row]
+    cell.configureWith(name: repository.fullName,
+                       description: repository.description,
+                       star: repository.starCount,
+                       fork: repository.forkCount)
+  }
+  
+  // MARK: Navigation
   
   func editSetting() {
     let settingPresenter = SettingPresenter(initialData: currentSetting) { [weak self] setting in

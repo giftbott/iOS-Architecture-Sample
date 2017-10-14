@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class RepositoriesTableViewCell: UITableViewCell {
+protocol RepositoriesCellType {
+  func configureWith(name: String, description: String?, star: Int, fork: Int)
+}
+
+final class RepositoriesTableViewCell: UITableViewCell, RepositoriesCellType {
   
   // MARK: - Properties
   

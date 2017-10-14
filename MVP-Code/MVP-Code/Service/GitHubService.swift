@@ -8,11 +8,17 @@
 
 import Foundation
 
-struct GitHubService {
+struct GitHubService: GitHubServiceType {
   
   // MARK: Properties
   
-  private var session: URLSession { return URLSession.shared }
+  private let session: URLSession
+  
+  // MARK: Initialize
+  
+  init(session: URLSession = URLSession.shared) {
+    self.session = session
+  }
   
   // MARK: DataTask
   

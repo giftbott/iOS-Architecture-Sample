@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: Repository
+
 struct Repository: Decodable {
   let fullName: String
   let description: String?
@@ -23,6 +25,8 @@ struct Repository: Decodable {
     case url = "html_url"
   }
 }
+
+// MARK: Repositories
 
 struct Repositories: Decodable {
   let items: [Repository]
