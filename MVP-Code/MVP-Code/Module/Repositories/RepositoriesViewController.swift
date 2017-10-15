@@ -76,8 +76,8 @@ final class RepositoriesViewController: BaseViewController {
   }
   
   override func setupBinding() {
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftTabBarButtonItem))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightTabBarButtonItem))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem))
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -86,11 +86,11 @@ final class RepositoriesViewController: BaseViewController {
   
   // MARK: Target Action
   
-  @objc func didTapLeftTabBarButtonItem() {
+  @objc func didTapLeftBarButtonItem() {
     presenter.reloadData()
   }
   
-  @objc func didTapRightTabBarButtonItem() {
+  @objc func didTapRightBarButtonItem() {
     presenter.editSetting()
   }
   
