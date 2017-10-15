@@ -36,9 +36,9 @@ final class SettingPresenter {
   let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
   
   // private
-  private let languages = Language.allValues.map { "\($0)".capitalized }
-  private let userIDs   = UserID.allValues.map { "\($0)".capitalized }
-  private let sortTypes = SortType.allValues.map { "\($0)".capitalized }
+  private let languages = Language.allValues.map { "\($0)" }
+  private let userIDs   = UserID.allValues.map { "\($0)" }
+  private let sortTypes = SortType.allValues.map { "\($0)" }
   
   private var currentSetting: ServiceSetting
   private var saveActionHandler: (ServiceSetting) -> ()
@@ -97,20 +97,15 @@ extension SettingPresenter: SettingPresenterType {
     let title: String
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
       title = languages[indexPath.row]
-      if title == "\(currentSetting.language)".capitalized {
-        view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
-      }
     } else if indexPath.section == sectionHeaders.index(of: "\(UserID.self)") {
       title = userIDs[indexPath.row]
-      if title == "\(currentSetting.userID)".capitalized {
-        view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
-      }
     } else {
       title = sortTypes[indexPath.row]
-      if title == "\(currentSetting.sortType)".capitalized {
-        view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
-      }
     }
-    cell.setTitleText(title)
+    cell.setTitleText(title.capitalized)
+    
+    if title == "\(currentSetting.language)" || title == "\(currentSetting.userID)" || title == "\(currentSetting.sortType)" {
+      view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
+    }
   }
 }

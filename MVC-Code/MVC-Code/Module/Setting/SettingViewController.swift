@@ -19,9 +19,9 @@ final class SettingViewController: BaseViewController {
   lazy var v = SettingView(controlBy: self)
   
   private let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
-  private let languages = Language.allValues.map { "\($0)".capitalized }
-  private let userIDs   = UserID.allValues.map { "\($0)".capitalized }
-  private let sortTypes = SortType.allValues.map { "\($0)".capitalized }
+  private let languages = Language.allValues.map { "\($0)" }
+  private let userIDs   = UserID.allValues.map { "\($0)" }
+  private let sortTypes = SortType.allValues.map { "\($0)" }
   
   private var currentSetting: ServiceSetting
   private var saveActionHandler: (ServiceSetting) -> ()
@@ -109,22 +109,20 @@ extension SettingViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
     
+    let title: String
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
-      cell.setTitleText(languages[indexPath.row])
-      if languages[indexPath.row] == "\(currentSetting.language)".capitalized {
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-      }
+      title = languages[indexPath.row]
     } else if indexPath.section == sectionHeaders.index(of: "\(UserID.self)") {
-      cell.setTitleText(userIDs[indexPath.row])
-      if userIDs[indexPath.row] == "\(currentSetting.userID)".capitalized {
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-      }
+      title = userIDs[indexPath.row]
     } else {
-      cell.setTitleText(sortTypes[indexPath.row])
-      if sortTypes[indexPath.row] == "\(currentSetting.sortType)".capitalized {
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-      }
+      title = sortTypes[indexPath.row]
     }
+    cell.setTitleText(title.capitalized)
+    
+    if title == "\(currentSetting.language)" || title == "\(currentSetting.userID)" || title == "\(currentSetting.sortType)" {
+      tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    }
+    
     return cell
   }
   
