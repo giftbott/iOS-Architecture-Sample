@@ -38,9 +38,6 @@ final class SettingInteractor {
   let languageValues = Language.allValues.map { "\($0)" }
   let userIDValues   = UserID.allValues.map { "\($0)" }
   let sortTypeValues = SortType.allValues.map { "\($0)" }
-  let settingValues = ["Language": Language.allValues.map { "\($0)" },
-                       "UserID": UserID.allValues.map { "\($0)" },
-                       "SortType": SortType.allValues.map { "\($0)" }]
   
   // MARK: Initialize
   
