@@ -20,20 +20,24 @@ class BaseWireframe {
         fatalError("Can't push without a navigation controller")
       }
       navigationController.pushViewController(viewController, animated: animated)
-    case .present:
-      view.present(viewController, animated: animated, completion: nil)
+    case .present(let sender):
+      sender.present(viewController, animated: animated)
     case .root(let window):
       window.rootViewController = viewController
     }
   }
   
   func pop(animated: Bool) {
-    if let presentingView = view.presentingViewController {
-      presentingView.dismiss(animated: animated)
-    } else if let navigationController = view.navigationController {
+    if let navigationController = view.navigationController {
       guard navigationController.popViewController(animated: animated) != nil else {
-        fatalError("First child view controller. Can't navigate back from \(view)")
+        if let presentingView = view.presentingViewController {
+          return presentingView.dismiss(animated: animated)
+        } else {
+          fatalError("Can't navigate back from \(view)")
+        }
       }
+    } else if let presentingView = view.presentingViewController {
+      presentingView.dismiss(animated: animated)
     } else {
       fatalError("Neither modal nor navigation! Can't navigate back from \(view)")
     }

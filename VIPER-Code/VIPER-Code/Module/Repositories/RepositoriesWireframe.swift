@@ -43,7 +43,7 @@ final class RepositoriesWireframe: BaseWireframe {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(okAction)
-    show(alertController, with: .present, animated: true)
+    show(alertController, with: .present(from: view), animated: true)
   }
 }
 

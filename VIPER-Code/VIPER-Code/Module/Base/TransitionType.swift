@@ -11,6 +11,6 @@ import UIKit
 enum TransitionType {
   case root(window: UIWindow)
   case push
-  case present
+  case present(from: UIViewController)
 }
 
