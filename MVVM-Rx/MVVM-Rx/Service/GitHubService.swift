@@ -35,9 +35,7 @@ struct GitHubService: GitHubServiceType {
     
     return session.rx.dataTask(request: URLRequest(url: url))
       .map { data throws in
-        let repositories = try JSONDecoder().decode(Repositories.self, from: data)
-        return repositories.items
+        return try data.decode(Repositories.self).items
       }
   }
 }
-

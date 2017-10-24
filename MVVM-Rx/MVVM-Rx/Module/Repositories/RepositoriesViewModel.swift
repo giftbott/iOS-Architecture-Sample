@@ -41,10 +41,10 @@ struct RepositoriesViewModel: RepositoriesViewModelType {
   
   // MARK: <- UI
   
-  let editSetting: Driver<SettingViewModelType>
+  let isNetworking: Driver<Bool>
   let showAlert: Driver<(String, String)>
   let repositories: Driver<[Repository]>
-  let isNetworking: Driver<Bool>
+  let editSetting: Driver<SettingViewModelType>
   let showRepository: Driver<String>
   
   // MARK: - Initialize
@@ -75,7 +75,7 @@ struct RepositoriesViewModel: RepositoriesViewModelType {
             return .never()
           })
       }.asDriver(onErrorJustReturn: [])
-
+    
     // Navigation
     
     editSetting = didTapRightBarButton
