@@ -14,21 +14,24 @@ protocol RepositoriesViewProtocol: class {
   func stopNetworking()
 }
 
+// MARK: - Class Implementation
+
 final class RepositoriesViewController: BaseViewController {
   
-  // MARK: Properties
-  
-  var presenter: RepositoriesPresenterProtocol!
-  private let tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
-  private let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-
   // MARK: UI Metrics
   
   private struct UI {
     static let baseMargin = CGFloat(8)
+    static let tableViewFrame = UIScreen.main.bounds
     static let estimatedRowHeight = CGFloat(80)
   }
   
+  // MARK: Properties
+  
+  var presenter: RepositoriesPresenterProtocol!
+  private let tableView = UITableView(frame: UI.tableViewFrame, style: .plain)
+  private let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+
   // MARK: View LifeCycle
   
   override func viewDidLoad() {
@@ -55,15 +58,19 @@ final class RepositoriesViewController: BaseViewController {
   }
   
   override func setupBinding() {
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem))
-    
     tableView.delegate = self
     tableView.dataSource = self
     tableView.refreshControl?.addTarget(self, action: #selector(didPulltoRefresh), for: .valueChanged)
+    
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem))
   }
   
   // MARK: Target Action
+  
+  @objc func didPulltoRefresh() {
+    presenter.reloadData()
+  }
   
   @objc func didTapLeftBarButtonItem() {
     presenter.reloadData()
@@ -72,18 +79,15 @@ final class RepositoriesViewController: BaseViewController {
   @objc func didTapRightBarButtonItem() {
     presenter.editSetting()
   }
-  
-  @objc func didPulltoRefresh() {
-    presenter.pullToRefresh()
-  }
 }
 
 // MARK: - RepositoriesViewProtocol
 
 extension RepositoriesViewController: RepositoriesViewProtocol {
-  
   func startNetworking() {
-    indicatorView.startAnimating()
+    if !tableView.refreshControl!.isRefreshing {
+      indicatorView.startAnimating()
+    }
   }
   
   func stopNetworking() {

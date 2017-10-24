@@ -15,6 +15,8 @@ protocol RepositoriesInteractorInputProtocol: class {
   func changeServiceSetting(to serviceSetting: ServiceSetting)
 }
 
+// MARK: - Class Implementation
+
 final class RepositoriesInteractor {
   weak var presenter: RepositoriesInteractorOutputProtocol!
   

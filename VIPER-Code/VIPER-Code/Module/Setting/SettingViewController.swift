@@ -8,30 +8,28 @@
 
 import UIKit
 
-// MARK: - Protocol
-
 protocol SettingViewProtocol: class {
   // Presenter -> View
-  func determineTalbeViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool)
+  func determineTableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool)
 }
 
 // MARK: - Class Implementation
 
 final class SettingViewController: BaseViewController {
   
-  // MARK: Properties
-  
-  var presenter: SettingPresenterProtocol!
-  private let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
-  
   // MARK: UI Metrics
   
   private struct UI {
     static let tableViewFrame = UIScreen.main.bounds
-    static let tableViewSectionHeaderHeight = CGFloat(40)
     static let tableViewRowHeight = CGFloat(40)
+    static let tableViewHeaderHeight = CGFloat(40)
     static let tableViewFooterHeight = CGFloat(0)
   }
+  
+  // MARK: Properties
+  
+  var presenter: SettingPresenterProtocol!
+  private let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
   
   // MARK: View LifeCycle
   
@@ -42,9 +40,10 @@ final class SettingViewController: BaseViewController {
   override func setupUI() {
     navigationItem.title = "Setting"
     
-    tableView.separatorColor = tableView.backgroundColor
     tableView.rowHeight = UI.tableViewRowHeight
+    tableView.sectionHeaderHeight = UI.tableViewHeaderHeight
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
+    tableView.separatorColor = tableView.backgroundColor
     tableView.allowsMultipleSelection = true
     tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     view.addSubview(tableView)
@@ -71,7 +70,7 @@ final class SettingViewController: BaseViewController {
 // MARK: - SettingViewProtocol
 
 extension SettingViewController: SettingViewProtocol {
-  func determineTalbeViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool) {
+  func determineTableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool) {
     if willSelect {
       tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
     } else {
@@ -98,10 +97,6 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     guard let headerView = view as? UITableViewHeaderFooterView else { return }
     headerView.textLabel?.textColor = .darkGray
-  }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return UI.tableViewSectionHeaderHeight
   }
 }
 

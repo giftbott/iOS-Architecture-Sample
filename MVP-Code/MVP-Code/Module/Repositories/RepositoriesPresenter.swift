@@ -13,7 +13,6 @@ import Foundation
 protocol RepositoriesPresenterType: class, PresenterType {
   weak var view: RepositoriesViewType! { get set }
   
-  func pullToRefresh()
   func reloadData()
   // TableView
   func configureCell(_ cell: RepositoriesCellType, forRowAt indexPath: IndexPath)
@@ -28,7 +27,7 @@ protocol RepositoriesPresenterType: class, PresenterType {
 final class RepositoriesPresenter {
   
   // MARK: Properties
-  
+
   weak var view: RepositoriesViewType!
   
   private let gitHubService: GitHubServiceType
@@ -51,6 +50,7 @@ final class RepositoriesPresenter {
   // MARK: Action
   
   private func requestGitHubRepositories() {
+    view.startNetworking()
     gitHubService.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       DispatchQueue.main.async {
@@ -69,13 +69,7 @@ final class RepositoriesPresenter {
 // MARK: - RepositoriesPresenterType
 
 extension RepositoriesPresenter: RepositoriesPresenterType {
-  
-  func pullToRefresh() {
-    requestGitHubRepositories()
-  }
-  
   func reloadData() {
-    view.startNetworking()
     requestGitHubRepositories()
   }
   

@@ -19,10 +19,11 @@ final class SettingViewController: BaseViewController {
   lazy var v = SettingView(controlBy: self)
   
   private let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
-  private let languages = Language.allValues.map { "\($0)" }
-  private let userIDs   = UserID.allValues.map { "\($0)" }
-  private let sortTypes = SortType.allValues.map { "\($0)" }
-  
+  private let sectionValues = [
+    Language.allValues.map { "\($0)" },
+    UserID.allValues.map { "\($0)" },
+    SortType.allValues.map { "\($0)" }
+  ]
   private var currentSetting: ServiceSetting
   private var saveActionHandler: (ServiceSetting) -> ()
   
@@ -55,6 +56,16 @@ final class SettingViewController: BaseViewController {
 // MARK: - TableViewDelegate
 
 extension SettingViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else { return nil }
+    for selectedIndexPath in selectedIndexPaths {
+      if selectedIndexPath.section == indexPath.section {
+        tableView.deselectRow(at: selectedIndexPath, animated: false)
+      }
+    }
+    return indexPath
+  }
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
       currentSetting.language = Language.allValues[indexPath.row]
@@ -65,16 +76,6 @@ extension SettingViewController: UITableViewDelegate {
     }
   }
   
-  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-    guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else { return nil }
-    for selected in selectedIndexPaths {
-      if selected.section == indexPath.section {
-        tableView.deselectRow(at: selected, animated: false)
-      }
-    }
-    return indexPath
-  }
-  
   func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
     return nil
   }
@@ -82,10 +83,6 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     guard let headerView = view as? UITableViewHeaderFooterView else { return }
     headerView.textLabel?.textColor = .darkGray
-  }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 40
   }
 }
 
@@ -97,36 +94,22 @@ extension SettingViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if section == sectionHeaders.index(of: "\(Language.self)") {
-      return languages.count
-    } else if section == sectionHeaders.index(of: "\(UserID.self)") {
-      return userIDs.count
-    } else {
-      return sortTypes.count
-    }
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
-    
-    let title: String
-    if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
-      title = languages[indexPath.row]
-    } else if indexPath.section == sectionHeaders.index(of: "\(UserID.self)") {
-      title = userIDs[indexPath.row]
-    } else {
-      title = sortTypes[indexPath.row]
-    }
-    cell.setTitleText(title.capitalized)
-    
-    if title == "\(currentSetting.language)" || title == "\(currentSetting.userID)" || title == "\(currentSetting.sortType)" {
-      tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-    }
-    
-    return cell
+    return sectionValues[section].count
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return sectionHeaders[section]
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
+    let title = sectionValues[indexPath.section][indexPath.row]
+    cell.setTitleText(title.capitalized)
+    
+    let settings = ["\(currentSetting.language)", "\(currentSetting.userID)", "\(currentSetting.sortType)"]
+    if settings.contains(title) {
+      tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    }
+    return cell
   }
 }

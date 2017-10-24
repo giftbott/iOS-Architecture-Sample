@@ -31,15 +31,14 @@ final class SettingPresenter {
   
   // MARK: Properties
   
-  // protocol
   weak var view: SettingViewType!
   let sectionHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
   
-  // private
-  private let languages = Language.allValues.map { "\($0)" }
-  private let userIDs   = UserID.allValues.map { "\($0)" }
-  private let sortTypes = SortType.allValues.map { "\($0)" }
-  
+  private let sectionValues = [
+    Language.allValues.map { "\($0)" },
+    UserID.allValues.map { "\($0)" },
+    SortType.allValues.map { "\($0)" }
+  ]
   private var currentSetting: ServiceSetting
   private var saveActionHandler: (ServiceSetting) -> ()
   
@@ -57,10 +56,21 @@ final class SettingPresenter {
 extension SettingPresenter: SettingPresenterType {
   func saveCurrentSetting() {
     saveActionHandler(currentSetting)
-    view.exit(animated: true)
+    view.pop(animated: true)
   }
   
   // MARK: TableView Handler
+  
+  func willSelectTableViewRow(at indexPath: IndexPath, selectedRows: [IndexPath]?) -> IndexPath? {
+    guard let selectedIndexPaths = selectedRows else { return nil }
+    
+    for selectedIndexPath in selectedIndexPaths {
+      if selectedIndexPath.section == indexPath.section {
+        view.determineTableViewRowSelection(willSelect: false, indexPath: selectedIndexPath, animated: false)
+      }
+    }
+    return indexPath
+  }
   
   func didSelectTableViewRow(at indexPath: IndexPath) {
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
@@ -72,40 +82,17 @@ extension SettingPresenter: SettingPresenterType {
     }
   }
   
-  func willSelectTableViewRow(at indexPath: IndexPath, selectedRows: [IndexPath]?) -> IndexPath? {
-    guard let selectedIndexPaths = selectedRows else { return nil }
-    
-    for selectedIndexPath in selectedIndexPaths {
-      if selectedIndexPath.section == indexPath.section {
-        view.determineTalbeViewRowSelection(willSelect: false, indexPath: selectedIndexPath, animated: false)
-      }
-    }
-    return indexPath
-  }
-  
   func numberOfRows(in section: Int) -> Int {
-    if section == sectionHeaders.index(of: "\(Language.self)") {
-      return languages.count
-    } else if section == sectionHeaders.index(of: "\(UserID.self)") {
-      return userIDs.count
-    } else {
-      return sortTypes.count
-    }
+    return sectionValues[section].count
   }
   
   func configureCell(_ cell: SettingCellType, forRowAt indexPath: IndexPath) {
-    let title: String
-    if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
-      title = languages[indexPath.row]
-    } else if indexPath.section == sectionHeaders.index(of: "\(UserID.self)") {
-      title = userIDs[indexPath.row]
-    } else {
-      title = sortTypes[indexPath.row]
-    }
+    let title = sectionValues[indexPath.section][indexPath.row]
     cell.setTitleText(title.capitalized)
     
-    if title == "\(currentSetting.language)" || title == "\(currentSetting.userID)" || title == "\(currentSetting.sortType)" {
-      view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
+    let settings = ["\(currentSetting.language)", "\(currentSetting.userID)", "\(currentSetting.sortType)"]
+    if settings.contains(title) {
+      view.determineTableViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
     }
   }
 }

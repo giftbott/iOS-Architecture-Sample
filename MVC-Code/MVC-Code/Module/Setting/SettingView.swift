@@ -10,26 +10,28 @@ import UIKit
 
 final class SettingView: BaseView<SettingViewController> {
   
-  // MARK: Properties
-  
-  let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
-  
   // MARK: UI Metrics
   
   private struct UI {
     static let tableViewFrame = UIScreen.main.bounds
     static let tableViewRowHeight = CGFloat(40)
+    static let tableViewHeaderHeight = CGFloat(40)
     static let tableViewFooterHeight = CGFloat(0)
   }
+  
+  // MARK: Properties
+  
+  let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
   
   // MARK: Initialize
   
   override func setupUI() {
     vc.navigationItem.title = "Setting"
     
-    tableView.separatorColor = tableView.backgroundColor
     tableView.rowHeight = UI.tableViewRowHeight
+    tableView.sectionHeaderHeight = UI.tableViewHeaderHeight
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
+    tableView.separatorColor = tableView.backgroundColor
     tableView.allowsMultipleSelection = true
     tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     addSubview(tableView)

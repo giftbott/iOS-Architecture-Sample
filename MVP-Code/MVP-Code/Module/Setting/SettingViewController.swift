@@ -11,27 +11,27 @@ import UIKit
 // MARK: - Protocol
 
 protocol SettingViewType: ViewType {
-  func exit(animated: Bool)
-  func determineTalbeViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool)
+  func pop(animated: Bool)
+  func determineTableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool)
 }
 
 // MARK: - Class Implentation
 
 final class SettingViewController: BaseViewController {
 
-  // MARK: Properties
-  
-  private let presenter: SettingPresenterType
-  private let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
-  
   // MARK: UI Metrics
   
   private struct UI {
     static let tableViewFrame = UIScreen.main.bounds
-    static let tableViewSectionHeaderHeight = CGFloat(40)
     static let tableViewRowHeight = CGFloat(40)
+    static let tableViewHeaderHeight = CGFloat(40)
     static let tableViewFooterHeight = CGFloat(0)
   }
+  
+  // MARK: Properties
+  
+  private let presenter: SettingPresenterType
+  private let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
   
   // MARK: Initialize
   
@@ -47,16 +47,13 @@ final class SettingViewController: BaseViewController {
 
   // MARK: View LifeCycle
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-  
   override func setupUI() {
     navigationItem.title = "Setting"
     
-    tableView.separatorColor = tableView.backgroundColor
     tableView.rowHeight = UI.tableViewRowHeight
+    tableView.sectionHeaderHeight = UI.tableViewHeaderHeight
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
+    tableView.separatorColor = tableView.backgroundColor
     tableView.allowsMultipleSelection = true
     tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     view.addSubview(tableView)
@@ -83,11 +80,11 @@ final class SettingViewController: BaseViewController {
 // MARK: - SettingViewType
 
 extension SettingViewController: SettingViewType {
-  func exit(animated: Bool) {
+  func pop(animated: Bool) {
     navigationController?.popViewController(animated: animated)
   }
   
-  func determineTalbeViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool) {
+  func determineTableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool) {
     if willSelect {
       tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
     } else {
@@ -100,12 +97,12 @@ extension SettingViewController: SettingViewType {
 // MARK: - TableViewDelegate
 
 extension SettingViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    presenter.didSelectTableViewRow(at: indexPath)
-  }
-  
   func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     return presenter.willSelectTableViewRow(at: indexPath, selectedRows: tableView.indexPathsForSelectedRows)
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    presenter.didSelectTableViewRow(at: indexPath)
   }
   
   func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -115,10 +112,6 @@ extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
     guard let headerView = view as? UITableViewHeaderFooterView else { return }
     headerView.textLabel?.textColor = .darkGray
-  }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return UI.tableViewSectionHeaderHeight
   }
 }
 

@@ -14,6 +14,8 @@ protocol RepositoriesWireframeProtocol: class {
   func navigate(to route: Router.Repositories)
 }
 
+// MARK: - Class Implementation
+
 final class RepositoriesWireframe: BaseWireframe {
   
   static func createModule(service: GitHubServiceType = GitHubService(), serviceSetting: ServiceSetting) -> RepositoriesViewController {

@@ -8,15 +8,11 @@
 
 import Foundation
 
-// MARK: - Protocol
-
 protocol SettingInteractorInputProtocol: class {
   // Presenter -> Interactor
   var currentSetting: ServiceSetting { get }
   var settingHeaders: [String] { get }
-  var languageValues: [String] { get }
-  var userIDValues: [String] { get }
-  var sortTypeValues: [String] { get }
+  var settingValues: [[String]] { get }
   
   func setServiceSettingForValue(at indexPath: IndexPath)
 }
@@ -35,9 +31,11 @@ final class SettingInteractor {
   var currentSetting: ServiceSetting
   
   let settingHeaders = ["\(Language.self)", "\(UserID.self)", "\(SortType.self)"]
-  let languageValues = Language.allValues.map { "\($0)" }
-  let userIDValues   = UserID.allValues.map { "\($0)" }
-  let sortTypeValues = SortType.allValues.map { "\($0)" }
+  let settingValues = [
+    Language.allValues.map { "\($0)" },
+    UserID.allValues.map { "\($0)" },
+    SortType.allValues.map { "\($0)" }
+  ]
   
   // MARK: Initialize
   

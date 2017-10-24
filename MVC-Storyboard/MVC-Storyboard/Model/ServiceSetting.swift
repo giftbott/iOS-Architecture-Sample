@@ -8,10 +8,6 @@
 
 import Foundation
 
-typealias Language = ServiceSetting.Language
-typealias UserID   = ServiceSetting.UserID
-typealias SortType = ServiceSetting.SortType
-
 struct ServiceSetting: Codable {
   var language = Language.swift
   var userID   = UserID.all

@@ -10,8 +10,6 @@ import Foundation
 
 protocol RepositoriesPresenterProtocol: class, BasePresenterProtocol {
   // View -> Presenter
-
-  func pullToRefresh()
   func reloadData()
   // TableView
   func configureCell(_ cell: RepositoriesCellType, forRowAt indexPath: IndexPath)
@@ -27,12 +25,16 @@ protocol RepositoriesInteractorOutputProtocol: class {
   func didReceivedError(_ error: Error)
 }
 
+// MARK: - Class Implementation
+
 final class RepositoriesPresenter {
+  
   // MARK: Properties
+  
   weak var view: RepositoriesViewProtocol!
   private let wireframe: RepositoriesWireframeProtocol
   private let interactor: RepositoriesInteractorInputProtocol
-
+  
   private var repositories = [Repository]()
   
   // MARK: Initialize
@@ -47,13 +49,10 @@ final class RepositoriesPresenter {
 }
 
 // MARK: - PresenterProtocol
+
 extension RepositoriesPresenter: RepositoriesPresenterProtocol {
   func onViewDidLoad() {
-    interactor.requestRepositoriesData()
-  }
-  
-  func pullToRefresh() {
-    interactor.requestRepositoriesData()
+    reloadData()
   }
   
   func reloadData() {
@@ -93,6 +92,7 @@ extension RepositoriesPresenter: RepositoriesPresenterProtocol {
 }
 
 // MARK: - InteractorOutputProtocol
+
 extension RepositoriesPresenter: RepositoriesInteractorOutputProtocol {
   func setRepositories(_ repositories: [Repository]) {
     self.repositories = repositories

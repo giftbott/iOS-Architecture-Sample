@@ -8,8 +8,6 @@
 
 import UIKit
 
-// MARK: - Protocol
-
 protocol SettingWireframeProtocol: class {
   // Presenter -> Wireframe
   func popViewController(animated: Bool)

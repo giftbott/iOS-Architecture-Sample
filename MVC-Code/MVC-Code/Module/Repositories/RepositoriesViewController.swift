@@ -19,10 +19,6 @@ final class RepositoriesViewController: BaseViewController {
   private var currentSetting: ServiceSetting
   private var repositories = [Repository]()
   
-  //  Set these properties on loadView method if needed
-  //  private weak var tableView: UITableView!
-  //  private weak var indicatorView: UIActivityIndicatorView!
-  
   // MARK: Initialize
   
   init(service: GitHubServiceType = GitHubService(), serviceSetting: ServiceSetting) {
@@ -48,37 +44,27 @@ final class RepositoriesViewController: BaseViewController {
   
   // MARK: Action
   
-  @objc func pullToRefresh() {
-    requestGitHubRepositories()
-  }
-  
   @objc func reloadData() {
-    v.indicatorView.startAnimating()
     requestGitHubRepositories()
   }
   
   private func requestGitHubRepositories() {
+    v.startNetworking()
     gitHubService.fetchGitHubRepositories(by: currentSetting) { [weak self] result in
       guard let `self` = self else { return }
       DispatchQueue.main.async {
         switch result {
         case .success(let repositories):
           self.repositories = repositories
-          self.v.tableView.reloadData()
         case .error(let error):
           let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
           let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
           alertController.addAction(okAction)
           self.present(alertController, animated: true)
         }
-        self.stopNetworking()
+        self.v.stopNetworking()
       }
     }
-  }
-  
-  private func stopNetworking() {
-    v.indicatorView.stopAnimating()
-    v.tableView.refreshControl?.endRefreshing()
   }
   
   // MARK: Navigation
@@ -118,8 +104,7 @@ extension RepositoriesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let reuseId = String(describing: RepositoriesTableViewCell.self)
-    let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as! RepositoriesTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: RepositoriesTableViewCell.identifier) as! RepositoriesTableViewCell
     
     let repository = repositories[indexPath.row]
     cell.configureWith(name: repository.fullName,

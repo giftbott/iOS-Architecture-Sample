@@ -25,18 +25,18 @@ protocol RepositoriesViewType: ViewType {
 
 final class RepositoriesViewController: BaseViewController {
   
-  // MARK: Properties
-  
-  private let presenter: RepositoriesPresenterType
-  private let tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
-  private let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-  
   // MARK: UI Metrics
   
   private struct UI {
     static let baseMargin = CGFloat(8)
     static let estimatedRowHeight = CGFloat(80)
   }
+  
+  // MARK: Properties
+  
+  private let presenter: RepositoriesPresenterType
+  private let tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
+  private let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
   
   // MARK: Initialize
   
@@ -86,16 +86,16 @@ final class RepositoriesViewController: BaseViewController {
   
   // MARK: Target Action
   
+  @objc func didPulltoRefresh() {
+    presenter.reloadData()
+  }
+  
   @objc func didTapLeftBarButtonItem() {
     presenter.reloadData()
   }
   
   @objc func didTapRightBarButtonItem() {
     presenter.editSetting()
-  }
-  
-  @objc func didPulltoRefresh() {
-    presenter.pullToRefresh()
   }
 }
 
@@ -126,7 +126,9 @@ extension RepositoriesViewController: RepositoriesViewType {
   // Networking
   
   func startNetworking() {
-    indicatorView.startAnimating()
+    if !tableView.refreshControl!.isRefreshing {
+      indicatorView.startAnimating()
+    }
   }
   
   func stopNetworking() {

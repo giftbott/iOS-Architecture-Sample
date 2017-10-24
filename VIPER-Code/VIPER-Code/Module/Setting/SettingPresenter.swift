@@ -8,8 +8,6 @@
 
 import Foundation
 
-// MARK: - Protocol
-
 protocol SettingPresenterProtocol: class, BasePresenterProtocol {
   // View -> Presenter
   var sectionHeaders: [String] { get }
@@ -59,7 +57,7 @@ extension SettingPresenter: SettingPresenterProtocol {
     wireframe.popViewController(animated: true)
   }
   
-  // MARK: TableView Handler
+  // TableView
   
   func didSelectTableViewRow(at indexPath: IndexPath) {
     interactor.setServiceSettingForValue(at: indexPath)
@@ -69,37 +67,24 @@ extension SettingPresenter: SettingPresenterProtocol {
     guard let selectedIndexPaths = selectedRows else { return nil }
     for selectedIndexPath in selectedIndexPaths {
       if selectedIndexPath.section == indexPath.section {
-        view.determineTalbeViewRowSelection(willSelect: false, indexPath: selectedIndexPath, animated: false)
+        view.determineTableViewRowSelection(willSelect: false, indexPath: selectedIndexPath, animated: false)
       }
     }
     return indexPath
   }
   
   func numberOfRows(in section: Int) -> Int {
-    if section == sectionHeaders.index(of: "Language") {
-      return interactor.languageValues.count
-    } else if section == sectionHeaders.index(of: "UserID") {
-      return interactor.userIDValues.count
-    } else {
-      return interactor.sortTypeValues.count
-    }
+    return interactor.settingValues[section].count
   }
   
   func configureCell(_ cell: SettingCellType, forRowAt indexPath: IndexPath) {
     let currentSetting = interactor.currentSetting
-    let title: String
-    
-    if indexPath.section == sectionHeaders.index(of: "Language") {
-      title = interactor.languageValues[indexPath.row]
-    } else if indexPath.section == sectionHeaders.index(of: "UserID") {
-      title = interactor.userIDValues[indexPath.row]
-    } else {
-      title = interactor.sortTypeValues[indexPath.row]
-    }
+    let title = interactor.settingValues[indexPath.section][indexPath.row]
     cell.setTitleText(title.capitalized)
     
-    if title == "\(currentSetting.language)" || title == "\(currentSetting.userID)" || title == "\(currentSetting.sortType)" {
-      view.determineTalbeViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
+    let settings = ["\(currentSetting.language)", "\(currentSetting.userID)", "\(currentSetting.sortType)"]
+    if settings.contains(title) {
+      view.determineTableViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
     }
   }
 }
