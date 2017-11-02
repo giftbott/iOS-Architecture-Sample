@@ -6,13 +6,13 @@
 //  Copyright © 2017년 giftbot. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 extension Reactive where Base: UIViewController {
   var viewWillAppear: ControlEvent<Void> {
-    let viewWillAppear = methodInvoked(#selector(Base.viewWillAppear)).map { _ in }
-    return ControlEvent(events: viewWillAppear)
+    let source = methodInvoked(#selector(Base.viewWillAppear)).map { _ in }
+    return ControlEvent(events: source)
   }
 }
 

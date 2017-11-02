@@ -12,8 +12,6 @@ final class RepositoriesTableViewCell: UITableViewCell {
   
   // MARK: - Properties
   
-  static let identifier = String(describing: RepositoriesTableViewCell.self)
-  
   private let nameLabel = UILabel()
   private let descLabel = UILabel()
   private let starImageView = UIImageView(image: #imageLiteral(resourceName: "img_star"))

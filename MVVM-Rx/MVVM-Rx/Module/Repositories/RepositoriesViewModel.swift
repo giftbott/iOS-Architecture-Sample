@@ -6,9 +6,11 @@
 //  Copyright © 2017년 giftbot. All rights reserved.
 //
 
-import Foundation
-import RxSwift
 import RxCocoa
+import RxDataSources
+import RxSwift
+
+typealias RepositoriesData = SectionModel<String, Repository>
 
 protocol RepositoriesViewModelType: ViewModelType {
   // Event
@@ -19,10 +21,10 @@ protocol RepositoriesViewModelType: ViewModelType {
   var didCellSelected: PublishSubject<Repository> { get }
   
   // UI
-  var editSetting: Driver<SettingViewModelType> { get }
-  var showAlert: Driver<(String, String)> { get }
-  var repositories: Driver<[Repository]> { get }
   var isNetworking: Driver<Bool> { get }
+  var showAlert: Driver<(String, String)> { get }
+  var repositories: Driver<[RepositoriesData]> { get }
+  var editSetting: Driver<SettingViewModelType> { get }
   var showRepository: Driver<String> { get }
 }
 
@@ -43,7 +45,7 @@ struct RepositoriesViewModel: RepositoriesViewModelType {
   
   let isNetworking: Driver<Bool>
   let showAlert: Driver<(String, String)>
-  let repositories: Driver<[Repository]>
+  let repositories: Driver<[RepositoriesData]>
   let editSetting: Driver<SettingViewModelType>
   let showRepository: Driver<String>
   
@@ -56,14 +58,15 @@ struct RepositoriesViewModel: RepositoriesViewModelType {
     isNetworking = onNetworking.asDriver(onErrorJustReturn: false)
     
     let onError = PublishSubject<Error>()
-    showAlert = onError.asObserver()
+    showAlert = onError
       .map { error -> (String, String) in
         return ("Error", error.localizedDescription)
       }.asDriver(onErrorJustReturn: ("Error", "Unknown Error"))
     
     // API Data
     
-    repositories = Observable.merge([viewWillAppear, didTapLeftBarButton, didPulltoRefresh])
+    repositories = Observable<Void>
+      .merge([viewWillAppear,  didTapLeftBarButton, didPulltoRefresh])
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
       .do(onNext: { _ in onNetworking.onNext(true) })
       .flatMapLatest {
@@ -74,8 +77,10 @@ struct RepositoriesViewModel: RepositoriesViewModelType {
             onError.onNext(error)
             return .never()
           })
-      }.asDriver(onErrorJustReturn: [])
-    
+      }
+      .map { [RepositoriesData(model: "", items: $0)] }
+      .asDriver(onErrorJustReturn: [])
+  
     // Navigation
     
     editSetting = didTapRightBarButton
@@ -88,7 +93,7 @@ struct RepositoriesViewModel: RepositoriesViewModelType {
         }
       }.asDriver(onErrorJustReturn: SettingViewModel())
     
-    showRepository = didCellSelected.asObserver()
+    showRepository = didCellSelected
       .map { $0.url }
       .asDriver(onErrorJustReturn: "")
   }

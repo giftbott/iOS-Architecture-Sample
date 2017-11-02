@@ -6,10 +6,11 @@
 //  Copyright © 2017년 giftbot. All rights reserved.
 //
 
-import UIKit
 import SafariServices
-import RxSwift
+
 import RxCocoa
+import RxDataSources
+import RxSwift
 
 final class RepositoriesViewController: UIViewController, ViewType {
   
@@ -41,8 +42,7 @@ final class RepositoriesViewController: UIViewController, ViewType {
     tableView.estimatedRowHeight = UI.estimatedRowHeight
     tableView.separatorColor = .mainColor
     tableView.separatorInset = UIEdgeInsetsMake(0, UI.baseMargin, 0, UI.baseMargin)
-    tableView.register(RepositoriesTableViewCell.self,
-                       forCellReuseIdentifier: RepositoriesTableViewCell.identifier)
+    tableView.register(cell: RepositoriesTableViewCell.self)
     
     indicatorView.color = .mainColor
     indicatorView.center = view.center
@@ -56,7 +56,7 @@ final class RepositoriesViewController: UIViewController, ViewType {
     rx.viewWillAppear
       .bind(to: viewModel.viewWillAppear)
       .disposed(by: disposeBag)
-    
+
     navigationItem.leftBarButtonItem?.rx.tap
       .bind(to: viewModel.didTapLeftBarButton)
       .disposed(by: disposeBag)
@@ -69,7 +69,7 @@ final class RepositoriesViewController: UIViewController, ViewType {
       .bind(to: viewModel.didPulltoRefresh)
       .disposed(by: disposeBag)
     
-    tableView.rx.modelSelected(Repository.self)
+    tableView.rx.modelSelected(RepositoriesData.Item.self)
       .bind(to: viewModel.didCellSelected)
       .disposed(by: disposeBag)
   }
@@ -77,16 +77,20 @@ final class RepositoriesViewController: UIViewController, ViewType {
   // MARK: - <- Rx UI Binding
   
   func setupUIBinding() {
+    let dataSource = RxTableViewSectionedReloadDataSource<RepositoriesData>(
+      configureCell: { (ds, tv, ip, item) -> UITableViewCell in
+        let cell = tv.dequeue(RepositoriesTableViewCell.self)!
+        cell.configureWith(name: item.fullName,
+                           description: item.description,
+                           star: item.starCount,
+                           fork: item.forkCount)
+        return cell
+    })
     
     viewModel.repositories
-      .drive(tableView.rx.items(cellIdentifier: RepositoriesTableViewCell.identifier, cellType: RepositoriesTableViewCell.self)) {
-        (_, repository, cell) in
-        cell.configureWith(name: repository.fullName,
-                           description: repository.description,
-                           star: repository.starCount,
-                           fork: repository.forkCount)
-      }.disposed(by: disposeBag)
-    
+      .drive(tableView.rx.items(dataSource: dataSource))
+      .disposed(by: disposeBag)
+
     viewModel.isNetworking
       .drive(onNext: { [weak self] isNetworking in
         self?.showNetworkingAnimation(isNetworking)
@@ -131,4 +135,3 @@ final class RepositoriesViewController: UIViewController, ViewType {
     }
   }
 }
-

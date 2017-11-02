@@ -10,10 +10,6 @@ import UIKit
 
 final class SettingTableViewCell: UITableViewCell {
   
-  // MARK: - Properties
-  
-  static let identifier = String(describing: SettingTableViewCell.self)
-  
   // MARK: - Initialize
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

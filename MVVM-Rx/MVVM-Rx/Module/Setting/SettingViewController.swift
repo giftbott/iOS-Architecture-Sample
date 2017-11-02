@@ -6,7 +6,6 @@
 //  Copyright © 2017년 giftbot. All rights reserved.
 //
 
-import UIKit
 import RxCocoa
 import RxDataSources
 import RxSwift
@@ -27,29 +26,30 @@ final class SettingViewController: UIViewController, ViewType {
   var disposeBag: DisposeBag!
   var viewModel: SettingViewModelType!
   private let tableView = UITableView(frame: UI.tableViewFrame, style: .grouped)
+  private let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
   
   // MARK: Setup UI
   
   func setupUI() {
     navigationItem.title = "Setting"
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+    navigationItem.rightBarButtonItem = saveButton
     
     tableView.separatorColor = tableView.backgroundColor
     tableView.rowHeight = UI.tableViewRowHeight
     tableView.sectionHeaderHeight = UI.tableViewSectionHeaderHeight
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
     tableView.allowsMultipleSelection = true
-    tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+    tableView.register(cell: SettingTableViewCell.self)
     view.addSubview(tableView)
   }
   
   // MARK: - -> Rx Event Binding
   
   func setupEventBinding() {
-    navigationItem.rightBarButtonItem?.rx.tap
+    saveButton.rx.tap
       .bind(to: viewModel.didTapSaveBarButton)
       .disposed(by: disposeBag)
-    
+
     tableView.rx.itemSelected
       .bind(to: viewModel.didSelectTableViewRow)
       .disposed(by: disposeBag)
@@ -69,10 +69,9 @@ final class SettingViewController: UIViewController, ViewType {
   func setupUIBinding() {
     let dataSource = RxTableViewSectionedReloadDataSource<SettingSection>(
       configureCell: { [weak self] (_, tableView, indexPath, item) in
-        guard let `self` = self else { return UITableViewCell() }
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
+        let cell = tableView.dequeue(SettingTableViewCell.self)!
+        self?.viewModel.configureCell.onNext(indexPath)
         cell.setTitleText(item.capitalized)
-        self.viewModel.checkInitialRowSelection.onNext((item, indexPath))
         return cell
       }, titleForHeaderInSection: { (dataSource, index) -> String? in
         dataSource.sectionModels[index].model
@@ -88,8 +87,8 @@ final class SettingViewController: UIViewController, ViewType {
       }).disposed(by: disposeBag)
     
     viewModel.rowSelection
-      .drive(onNext: { [weak self] (select, indexPath, animated) in
-        self?.tableViewRowSelection(willSelect: select, indexPath: indexPath, animated: animated)
+      .drive(onNext: { [weak self] (selected, indexPath, animated) in
+        self?.tableViewRowSelection(willSelect: selected, indexPath: indexPath, animated: animated)
       }).disposed(by: disposeBag)
   }
   
@@ -108,7 +107,8 @@ final class SettingViewController: UIViewController, ViewType {
 
 extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-    viewModel.willSelectTableViewRow.onNext((indexPath, tableView.indexPathsForSelectedRows))
+    viewModel.willSelectTableViewRow
+      .onNext((indexPath, selectedIndexPaths: tableView.indexPathsForSelectedRows))
     return viewModel.willSelectTableViewRowIndexPath.value
   }
   

@@ -6,8 +6,8 @@
 //  Copyright © 2017년 giftbot. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 struct GitHubService: GitHubServiceType {
   
@@ -35,7 +35,8 @@ struct GitHubService: GitHubServiceType {
     
     return session.rx.dataTask(request: URLRequest(url: url))
       .map { data throws in
-        return try data.decode(Repositories.self).items
+        let repositories = try data.decode(Repositories.self)
+        return repositories.items
       }
   }
 }

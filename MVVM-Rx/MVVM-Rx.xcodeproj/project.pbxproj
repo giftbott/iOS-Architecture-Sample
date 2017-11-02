@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		52927A4A1F9FA78C007AD6C2 /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52927A491F9FA78C007AD6C2 /* Data+Decode.swift */; };
+		52C907901FA8D7C800953921 /* Cell+TableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C9078F1FA8D7C700953921 /* Cell+TableViewCellType.swift */; };
 		52D33C011F9F8B3C00E125F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D33C001F9F8B3C00E125F1 /* AppDelegate.swift */; };
 		52D33C2F1F9F8C0D00E125F1 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D33C131F9F8C0D00E125F1 /* Repository.swift */; };
 		52D33C301F9F8C0D00E125F1 /* ServiceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D33C141F9F8C0D00E125F1 /* ServiceSetting.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		21B42D153ADB124B48C1400E /* Pods-MVVM-Rx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVM-Rx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MVVM-Rx/Pods-MVVM-Rx.debug.xcconfig"; sourceTree = "<group>"; };
 		52927A491F9FA78C007AD6C2 /* Data+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Decode.swift"; sourceTree = "<group>"; };
+		52C9078F1FA8D7C700953921 /* Cell+TableViewCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cell+TableViewCellType.swift"; sourceTree = "<group>"; };
 		52D33BFD1F9F8B3C00E125F1 /* MVVM-Rx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVVM-Rx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D33C001F9F8B3C00E125F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D33C131F9F8C0D00E125F1 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				52D33C241F9F8C0D00E125F1 /* UIView+LayoutAnchor.swift */,
 				52D33C251F9F8C0D00E125F1 /* UIView+SubView.swift */,
 				52927A491F9FA78C007AD6C2 /* Data+Decode.swift */,
+				52C9078F1FA8D7C700953921 /* Cell+TableViewCellType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				52D33C301F9F8C0D00E125F1 /* ServiceSetting.swift in Sources */,
 				52D33C381F9F8C0D00E125F1 /* SettingViewModel.swift in Sources */,
 				52D33C3A1F9F8C0D00E125F1 /* UIColor+BaseColor.swift in Sources */,
+				52C907901FA8D7C800953921 /* Cell+TableViewCellType.swift in Sources */,
 				52D33C3F1F9F8C0D00E125F1 /* ServiceResult.swift in Sources */,
 				52D33C341F9F8C0D00E125F1 /* RepositoriesViewController.swift in Sources */,
 				52D33C2F1F9F8C0D00E125F1 /* Repository.swift in Sources */,
