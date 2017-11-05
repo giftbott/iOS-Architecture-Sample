@@ -48,8 +48,7 @@ final class RepositoriesViewController: BaseViewController {
     tableView.estimatedRowHeight = UI.estimatedRowHeight
     tableView.separatorColor = .mainColor
     tableView.separatorInset = UIEdgeInsetsMake(0, UI.baseMargin, 0, UI.baseMargin)
-    tableView.register(RepositoriesTableViewCell.self,
-                       forCellReuseIdentifier: RepositoriesTableViewCell.identifier)
+    tableView.register(cell: RepositoriesTableViewCell.self)
     
     indicatorView.color = .mainColor
     indicatorView.center = view.center
@@ -62,8 +61,12 @@ final class RepositoriesViewController: BaseViewController {
     tableView.dataSource = self
     tableView.refreshControl?.addTarget(self, action: #selector(didPulltoRefresh), for: .valueChanged)
     
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem)
+    )
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem)
+    )
   }
   
   // MARK: Target Action
@@ -115,7 +118,7 @@ extension RepositoriesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RepositoriesTableViewCell.identifier) as! RepositoriesTableViewCell
+    let cell = tableView.dequeue(RepositoriesTableViewCell.self)!
     presenter.configureCell(cell, forRowAt: indexPath)
     return cell
   }

@@ -35,19 +35,21 @@ struct GitHubService: GitHubServiceType {
     }
     
     let dataTask = session.dataTask(with: url) { (data, response, error) in
-      if let error = error, data == nil {
-        completion(.error(error))
+      guard let response = response as? HTTPURLResponse, let data = data else {
+        completion(.error(error ?? ServiceError.unknown))
         return
       }
-    
+      guard 200..<400 ~= response.statusCode else {
+        completion(.error(ServiceError.requestFailed(response: response, data: data)))
+        return
+      }
       do {
-        let repositories = try JSONDecoder().decode(Repositories.self, from: data!)
+        let repositories = try data.decode(Repositories.self)
         completion(.success(repositories.items))
       } catch let error {
         completion(.error(error))
       }
     }
-    
     dataTask.resume()
   }
 }

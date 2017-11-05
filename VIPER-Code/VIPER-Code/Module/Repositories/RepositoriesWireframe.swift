@@ -16,9 +16,12 @@ protocol RepositoriesWireframeProtocol: class {
 
 // MARK: - Class Implementation
 
-final class RepositoriesWireframe: BaseWireframe {
+final class RepositoriesWireframe: BaseWireframe, RepositoriesWireframeProtocol {
   
-  static func createModule(service: GitHubServiceType = GitHubService(), serviceSetting: ServiceSetting) -> RepositoriesViewController {
+  static func createModule(
+    service: GitHubServiceType = GitHubService(),
+    serviceSetting: ServiceSetting
+    ) -> RepositoriesViewController {
     let view = RepositoriesViewController()
     let wireframe = RepositoriesWireframe()
     let interactor = RepositoriesInteractor(service: service, serviceSetting: serviceSetting)
@@ -30,6 +33,21 @@ final class RepositoriesWireframe: BaseWireframe {
     
     return view
   }
+  
+  // MARK: RepositoriesWireframeProtocol
+  
+  func navigate(to route: Router.Repositories) {
+    switch route {
+    case .repository(let url):
+      showRepository(by: url)
+    case .editSetting(let currentSetting, let completion):
+      showSettingView(with: currentSetting, completion: completion)
+    case .alert(let title, let message):
+      presentAlert(title: title, message: message)
+    }
+  }
+
+  // MARK: Navigation
   
   private func showRepository(by url: URL) {
     let safariViewController = SFSafariViewController(url: url)
@@ -46,20 +64,5 @@ final class RepositoriesWireframe: BaseWireframe {
     let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     alertController.addAction(okAction)
     show(alertController, with: .present(from: view), animated: true)
-  }
-}
-
-// MARK: - WireframeProtocol
-
-extension RepositoriesWireframe: RepositoriesWireframeProtocol {
-  func navigate(to route: Router.Repositories) {
-    switch route {
-    case .repository(let url):
-      showRepository(by: url)
-    case .editSetting(let currentSetting, let completion):
-      showSettingView(with: currentSetting, completion: completion)
-    case .alert(let title, let message):
-      presentAlert(title: title, message: message)
-    }
   }
 }

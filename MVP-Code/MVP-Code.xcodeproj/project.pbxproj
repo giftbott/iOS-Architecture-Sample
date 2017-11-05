@@ -26,6 +26,8 @@
 		52D8DA1A1F86B37600BB1575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DA191F86B37600BB1575 /* AppDelegate.swift */; };
 		52D8DA3A1F86B4A400BB1575 /* RepositoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D8DA391F86B4A400BB1575 /* RepositoriesPresenter.swift */; };
 		52DD66A01F8A04BC00A43500 /* ServiceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD669F1F8A04BC00A43500 /* ServiceSetting.swift */; };
+		52E08BD01FAE117B00D92494 /* Cell+TableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E08BCE1FAE117A00D92494 /* Cell+TableViewCellType.swift */; };
+		52E08BD11FAE117B00D92494 /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E08BCF1FAE117B00D92494 /* Data+Decode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		52D8DA191F86B37600BB1575 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D8DA391F86B4A400BB1575 /* RepositoriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesPresenter.swift; sourceTree = "<group>"; };
 		52DD669F1F8A04BC00A43500 /* ServiceSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSetting.swift; sourceTree = "<group>"; };
+		52E08BCE1FAE117A00D92494 /* Cell+TableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+TableViewCellType.swift"; sourceTree = "<group>"; };
+		52E08BCF1FAE117B00D92494 /* Data+Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Decode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,8 @@
 		528B19BD1F86B3FF0030A047 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				52E08BCE1FAE117A00D92494 /* Cell+TableViewCellType.swift */,
+				52E08BCF1FAE117B00D92494 /* Data+Decode.swift */,
 				528B19BE1F86B3FF0030A047 /* UIColor+BaseColor.swift */,
 				528B19BF1F86B3FF0030A047 /* UIView+LayoutAnchor.swift */,
 				528B19C01F86B3FF0030A047 /* UIView+SubView.swift */,
@@ -253,6 +259,8 @@
 				52D8DA3A1F86B4A400BB1575 /* RepositoriesPresenter.swift in Sources */,
 				528B19C61F86B3FF0030A047 /* SettingTableViewCell.swift in Sources */,
 				52DD66A01F8A04BC00A43500 /* ServiceSetting.swift in Sources */,
+				52E08BD11FAE117B00D92494 /* Data+Decode.swift in Sources */,
+				52E08BD01FAE117B00D92494 /* Cell+TableViewCellType.swift in Sources */,
 				528B19C11F86B3FF0030A047 /* BasePresenterType.swift in Sources */,
 				528B19C81F86B3FF0030A047 /* SettingViewController.swift in Sources */,
 				528B19CF1F86B3FF0030A047 /* UIColor+BaseColor.swift in Sources */,

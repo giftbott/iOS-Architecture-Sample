@@ -102,8 +102,7 @@ extension RepositoriesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RepositoriesTableViewCell.identifier) as! RepositoriesTableViewCell
-    
+    let cell = tableView.dequeue(RepositoriesTableViewCell.self, for: indexPath)
     let repository = repositories[indexPath.row]
     cell.configureWith(name: repository.fullName,
                        description: repository.description,

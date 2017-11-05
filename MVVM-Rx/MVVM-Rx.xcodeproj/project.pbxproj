@@ -164,12 +164,12 @@
 		52D33C211F9F8C0D00E125F1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				52C9078F1FA8D7C700953921 /* Cell+TableViewCellType.swift */,
+				52927A491F9FA78C007AD6C2 /* Data+Decode.swift */,
 				52D33C221F9F8C0D00E125F1 /* Reactive+Base.swift */,
 				52D33C231F9F8C0D00E125F1 /* UIColor+BaseColor.swift */,
 				52D33C241F9F8C0D00E125F1 /* UIView+LayoutAnchor.swift */,
 				52D33C251F9F8C0D00E125F1 /* UIView+SubView.swift */,
-				52927A491F9FA78C007AD6C2 /* Data+Decode.swift */,
-				52C9078F1FA8D7C700953921 /* Cell+TableViewCellType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";

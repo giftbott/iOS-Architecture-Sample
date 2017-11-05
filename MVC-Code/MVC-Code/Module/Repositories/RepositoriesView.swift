@@ -34,8 +34,7 @@ final class RepositoriesView: BaseView<RepositoriesViewController> {
     tableView.estimatedRowHeight = UI.estimatedRowHeight
     tableView.separatorColor = .mainColor
     tableView.separatorInset = UIEdgeInsetsMake(0, UI.baseMargin, 0, UI.baseMargin)
-    tableView.register(RepositoriesTableViewCell.self,
-                       forCellReuseIdentifier: RepositoriesTableViewCell.identifier)
+    tableView.register(cell: RepositoriesTableViewCell.self)
     
     indicatorView.color = .mainColor
     indicatorView.center = center
@@ -48,8 +47,12 @@ final class RepositoriesView: BaseView<RepositoriesViewController> {
     tableView.dataSource = vc
     tableView.refreshControl?.addTarget(vc, action: #selector(vc.reloadData), for: .valueChanged)
     
-    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: vc, action: #selector(vc.reloadData))
-    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: vc, action: #selector(vc.editSetting))
+    vc.navigationItem.leftBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .refresh, target: vc, action: #selector(vc.reloadData)
+    )
+    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: vc, action: #selector(vc.editSetting)
+    )
   }
   
   // MARK: Action

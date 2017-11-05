@@ -15,9 +15,9 @@ protocol RepositoriesPresenterType: class, PresenterType {
   
   func reloadData()
   // TableView
-  func configureCell(_ cell: RepositoriesCellType, forRowAt indexPath: IndexPath)
   func didSelectTableViewRowAt(indexPath: IndexPath)
   func numberOfRows(in section: Int) -> Int
+  func configureCell(_ cell: RepositoriesCellType, forRowAt indexPath: IndexPath)
   // Navigation
   func editSetting()
 }

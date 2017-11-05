@@ -14,11 +14,11 @@ protocol SettingPresenterType: class, PresenterType {
   weak var view: SettingViewType! { get set }
   var sectionHeaders: [String] { get }
   
-  func didSelectTableViewRow(at indexPath: IndexPath)
+  func saveCurrentSetting()
   func willSelectTableViewRow(at indexPath: IndexPath, selectedRows: [IndexPath]?) -> IndexPath?
+  func didSelectTableViewRow(at indexPath: IndexPath)
   func numberOfRows(in section: Int) -> Int
   func configureCell(_ cell: SettingCellType, forRowAt indexPath: IndexPath)
-  func saveCurrentSetting()
 }
 
 // MARK: - Class Implementation
@@ -63,12 +63,9 @@ extension SettingPresenter: SettingPresenterType {
   
   func willSelectTableViewRow(at indexPath: IndexPath, selectedRows: [IndexPath]?) -> IndexPath? {
     guard let selectedIndexPaths = selectedRows else { return nil }
-    
-    for selectedIndexPath in selectedIndexPaths {
-      if selectedIndexPath.section == indexPath.section {
-        view.determineTableViewRowSelection(willSelect: false, indexPath: selectedIndexPath, animated: false)
-      }
-    }
+    selectedIndexPaths
+      .filter { $0.section == indexPath.section }
+      .forEach { view.deselectTableViewRow(at: $0, animated: false) }
     return indexPath
   }
   
@@ -92,7 +89,7 @@ extension SettingPresenter: SettingPresenterType {
     
     let settings = ["\(currentSetting.language)", "\(currentSetting.userID)", "\(currentSetting.sortType)"]
     if settings.contains(title) {
-      view.determineTableViewRowSelection(willSelect: true, indexPath: indexPath, animated: true)
+      view.selectTableViewRow(at: indexPath, animated: true)
     }
   }
 }

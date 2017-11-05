@@ -96,9 +96,9 @@ final class SettingViewController: UIViewController, ViewType {
   
   private func tableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool) {
     if willSelect {
-      self.tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
+      tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
     } else {
-      self.tableView.deselectRow(at: indexPath, animated: animated)
+      tableView.deselectRow(at: indexPath, animated: animated)
     }
   }
 }

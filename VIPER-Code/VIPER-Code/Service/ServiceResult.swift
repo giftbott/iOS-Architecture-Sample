@@ -14,6 +14,7 @@ enum Result<T> {
 }
 
 enum ServiceError: Error {
+  case unknown
   case urlTransformFailed
-  case jsonDecodingFailed
+  case requestFailed(response: URLResponse, data: Data?)
 }

@@ -6,10 +6,8 @@
 //  Copyright © 2017년 giftbot. All rights reserved.
 //
 
-import UIKit
 import SafariServices
-
-// MARK: - Protocol
+import UIKit
 
 protocol RepositoriesViewType: ViewType {
   func presentAlert(title: String, message: String)
@@ -66,8 +64,7 @@ final class RepositoriesViewController: BaseViewController {
     tableView.estimatedRowHeight = UI.estimatedRowHeight
     tableView.separatorColor = .mainColor
     tableView.separatorInset = UIEdgeInsetsMake(0, UI.baseMargin, 0, UI.baseMargin)
-    tableView.register(RepositoriesTableViewCell.self,
-                       forCellReuseIdentifier: RepositoriesTableViewCell.identifier)
+    tableView.register(cell: RepositoriesTableViewCell.self)
     
     indicatorView.color = .mainColor
     indicatorView.center = view.center
@@ -76,8 +73,12 @@ final class RepositoriesViewController: BaseViewController {
   }
   
   override func setupBinding() {
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem))
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .refresh, target: self, action: #selector(didTapLeftBarButtonItem)
+    )
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: self, action: #selector(didTapRightBarButtonItem)
+    )
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -156,8 +157,7 @@ extension RepositoriesViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let reuseId = RepositoriesTableViewCell.identifier
-    let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) as! RepositoriesTableViewCell
+    let cell = tableView.dequeue(RepositoriesTableViewCell.self)!
     presenter.configureCell(cell, forRowAt: indexPath)
     return cell
   }

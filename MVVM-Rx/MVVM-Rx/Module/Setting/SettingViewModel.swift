@@ -76,11 +76,9 @@ struct SettingViewModel: SettingViewModelType {
     willSelectTableViewRow
       .subscribe(onNext: { indexPath, selectedIndexPaths in
         guard let selectedIndexPaths = selectedIndexPaths else { return }
-        for selectedIndexPath in selectedIndexPaths {
-          if selectedIndexPath.section == indexPath.section {
-            selectRowEvent.onNext((selected: false, indexPath: selectedIndexPath, animated: false))
-          }
-        }
+        selectedIndexPaths
+          .filter { $0.section == indexPath.section }
+          .forEach { selectRowEvent.onNext((selected: false, indexPath: $0, animated: false)) }
         _willSelectTableViewRowIndexPath.accept(indexPath)
       }).disposed(by: disposeBag)
 

@@ -17,21 +17,24 @@ protocol RepositoriesInteractorInputProtocol: class {
 
 // MARK: - Class Implementation
 
-final class RepositoriesInteractor {
+final class RepositoriesInteractor: RepositoriesInteractorInputProtocol {
+  
+  // MARK: Properties
+  
   weak var presenter: RepositoriesInteractorOutputProtocol!
   
   var currentSetting: ServiceSetting
   private let gitHubService: GitHubServiceType
   
+  // MARK: Initializing
+  
   init(service: GitHubServiceType, serviceSetting: ServiceSetting) {
     gitHubService = service
     currentSetting = serviceSetting
   }
-}
-
-// MARK: - InteractorInputProtocol
-
-extension RepositoriesInteractor: RepositoriesInteractorInputProtocol {
+  
+  // MARK: RepositoriesInteractorInputProtocol
+  
   func changeServiceSetting(to serviceSetting: ServiceSetting) {
     currentSetting = serviceSetting
     currentSetting.encoded()

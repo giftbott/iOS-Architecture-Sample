@@ -12,8 +12,6 @@ final class RepositoriesTableViewCell: UITableViewCell {
   
   // MARK: Properties
   
-  static let identifier = String(describing: RepositoriesTableViewCell.self)
-  
   @IBOutlet private var nameLabel: UILabel!
   @IBOutlet private var descLabel: UILabel!
   @IBOutlet private var starLabel: UILabel!

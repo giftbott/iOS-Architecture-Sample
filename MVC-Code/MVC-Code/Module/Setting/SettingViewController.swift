@@ -58,11 +58,9 @@ final class SettingViewController: BaseViewController {
 extension SettingViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else { return nil }
-    for selectedIndexPath in selectedIndexPaths {
-      if selectedIndexPath.section == indexPath.section {
-        tableView.deselectRow(at: selectedIndexPath, animated: false)
-      }
-    }
+    selectedIndexPaths
+      .filter { $0.section == indexPath.section }
+      .forEach { tableView.deselectRow(at: $0, animated: false) }
     return indexPath
   }
   
@@ -102,7 +100,7 @@ extension SettingViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
+    let cell = tableView.dequeue(SettingTableViewCell.self)!
     let title = sectionValues[indexPath.section][indexPath.row]
     cell.setTitleText(title.capitalized)
     

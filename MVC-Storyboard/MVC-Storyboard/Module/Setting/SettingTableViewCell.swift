@@ -10,10 +10,6 @@ import UIKit
 
 final class SettingTableViewCell: UITableViewCell {
   
-  // MARK: Properties
-  
-  static let identifier = String(describing: SettingTableViewCell.self)
-  
   // MARK: Configure Selection
   
   override func setSelected(_ selected: Bool, animated: Bool) {

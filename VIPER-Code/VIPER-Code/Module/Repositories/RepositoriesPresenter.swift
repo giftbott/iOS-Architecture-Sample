@@ -39,9 +39,11 @@ final class RepositoriesPresenter {
   
   // MARK: Initialize
   
-  init(view: RepositoriesViewProtocol,
-       wireframe: RepositoriesWireframeProtocol,
-       interactor: RepositoriesInteractorInputProtocol) {
+  init(
+    view: RepositoriesViewProtocol,
+    wireframe: RepositoriesWireframeProtocol,
+    interactor: RepositoriesInteractorInputProtocol
+    ) {
     self.view = view
     self.wireframe = wireframe
     self.interactor = interactor
@@ -83,11 +85,13 @@ extension RepositoriesPresenter: RepositoriesPresenterProtocol {
   // MARK: Navigation
   
   func editSetting() {
-    wireframe.navigate(to: .editSetting(interactor.currentSetting, completion: { [weak self] setting in
-      guard let `self` = self, self.interactor.currentSetting != setting else { return }
-      self.interactor.changeServiceSetting(to: setting)
-      self.reloadData()
-    }))
+    wireframe.navigate(
+      to: .editSetting(interactor.currentSetting, completion: { [weak self] setting in
+        guard let `self` = self, self.interactor.currentSetting != setting else { return }
+        self.interactor.changeServiceSetting(to: setting)
+        self.reloadData()
+      })
+    )
   }
 }
 

@@ -33,8 +33,12 @@ final class RepositoriesViewController: UIViewController, ViewType {
 
   func setupUI() {
     navigationItem.title = "Repository List"
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil)
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: nil, action: nil)
+    navigationItem.leftBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .refresh, target: nil, action: nil
+    )
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      image: #imageLiteral(resourceName: "btn_setting"), style: .plain, target: nil, action: nil
+    )
     
     tableView.refreshControl = UIRefreshControl()
     tableView.refreshControl?.tintColor = .mainColor
@@ -78,8 +82,8 @@ final class RepositoriesViewController: UIViewController, ViewType {
   
   func setupUIBinding() {
     let dataSource = RxTableViewSectionedReloadDataSource<RepositoriesData>(
-      configureCell: { (ds, tv, ip, item) -> UITableViewCell in
-        let cell = tv.dequeue(RepositoriesTableViewCell.self)!
+      configureCell: { (_, tableView, indexPath, item) -> UITableViewCell in
+        let cell = tableView.dequeue(RepositoriesTableViewCell.self)!
         cell.configureWith(name: item.fullName,
                            description: item.description,
                            star: item.starCount,

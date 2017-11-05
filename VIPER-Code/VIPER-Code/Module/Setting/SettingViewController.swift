@@ -10,7 +10,8 @@ import UIKit
 
 protocol SettingViewProtocol: class {
   // Presenter -> View
-  func determineTableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool)
+  func selectTableViewRow(at indexPath: IndexPath, animated: Bool)
+  func deselectTableViewRow(at indexPath: IndexPath, animated: Bool)
 }
 
 // MARK: - Class Implementation
@@ -45,7 +46,7 @@ final class SettingViewController: BaseViewController {
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
     tableView.separatorColor = tableView.backgroundColor
     tableView.allowsMultipleSelection = true
-    tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+    tableView.register(cell: SettingTableViewCell.self)
     view.addSubview(tableView)
   }
   
@@ -53,10 +54,9 @@ final class SettingViewController: BaseViewController {
     tableView.delegate = self
     tableView.dataSource = self
     
-    let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                        target: self,
-                                        action: #selector(didTapSaveBarButton))
-    navigationItem.rightBarButtonItem = saveBarButton
+    navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .save, target: self, action: #selector(didTapSaveBarButton)
+    )
   }
   
   // MARK: Target Action
@@ -70,12 +70,12 @@ final class SettingViewController: BaseViewController {
 // MARK: - SettingViewProtocol
 
 extension SettingViewController: SettingViewProtocol {
-  func determineTableViewRowSelection(willSelect: Bool, indexPath: IndexPath, animated: Bool) {
-    if willSelect {
-      tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
-    } else {
-      tableView.deselectRow(at: indexPath, animated: animated)
-    }
+  func selectTableViewRow(at indexPath: IndexPath, animated: Bool) {
+    tableView.selectRow(at: indexPath, animated: animated, scrollPosition: .none)
+  }
+  
+  func deselectTableViewRow(at indexPath: IndexPath, animated: Bool) {
+    tableView.deselectRow(at: indexPath, animated: animated)
   }
 }
 
@@ -112,7 +112,7 @@ extension SettingViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier) as! SettingTableViewCell
+    let cell = tableView.dequeue(SettingTableViewCell.self)!
     presenter.configureCell(cell, forRowAt: indexPath)
     return cell
   }

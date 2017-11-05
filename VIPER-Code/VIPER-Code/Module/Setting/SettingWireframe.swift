@@ -15,9 +15,12 @@ protocol SettingWireframeProtocol: class {
 
 // MARK: - Class Implementation
 
-final class SettingWireframe: BaseWireframe {
+final class SettingWireframe: BaseWireframe, SettingWireframeProtocol {
   
-  static func createModule(serviceSetting: ServiceSetting, completion: @escaping (ServiceSetting) -> ()) -> SettingViewController {
+  static func createModule(
+    serviceSetting: ServiceSetting,
+    completion: @escaping (ServiceSetting) -> ()
+    ) -> SettingViewController {
     let view = SettingViewController()
     let wireframe = SettingWireframe()
     let interactor = SettingInteractor(serviceSetting: serviceSetting)
@@ -29,11 +32,7 @@ final class SettingWireframe: BaseWireframe {
     
     return view
   }
-}
-
-// MARK: - SettingWireframeProtocol
-
-extension SettingWireframe: SettingWireframeProtocol {
+  
   func popViewController(animated: Bool) {
     pop(animated: true)
   }

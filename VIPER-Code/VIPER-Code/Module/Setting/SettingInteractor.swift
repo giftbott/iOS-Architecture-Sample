@@ -19,7 +19,7 @@ protocol SettingInteractorInputProtocol: class {
 
 // MARK: - Class Implementation
 
-final class SettingInteractor {
+final class SettingInteractor: SettingInteractorInputProtocol {
   
   typealias Language = ServiceSetting.Language
   typealias UserID   = ServiceSetting.UserID
@@ -42,11 +42,9 @@ final class SettingInteractor {
   init(serviceSetting: ServiceSetting) {
     currentSetting = serviceSetting
   }
-}
 
-// MARK: - SettingInteractorInputProtocol
+  // MARK: SettingInteractorInputProtocol
 
-extension SettingInteractor: SettingInteractorInputProtocol {
   func setServiceSettingForValue(at indexPath: IndexPath) {
     if indexPath.section == settingHeaders.index(of: "\(Language.self)") {
       currentSetting.language = Language.allValues[indexPath.row]

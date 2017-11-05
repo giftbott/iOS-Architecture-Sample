@@ -14,10 +14,6 @@ protocol SettingCellType {
 
 final class SettingTableViewCell: UITableViewCell, SettingCellType {
   
-  // MARK: - Properties
-  
-  static let identifier = String(describing: SettingTableViewCell.self)
-  
   // MARK: - Initialize
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -36,7 +32,7 @@ final class SettingTableViewCell: UITableViewCell, SettingCellType {
     if selected {
       accessoryType = .checkmark
       textLabel?.font = .boldSystemFont(ofSize: 14)
-      textLabel?.textColor = UIColor(red: 0, green: 0.44, blue: 1, alpha: 1)
+      textLabel?.textColor = .mainColor
     } else {
       accessoryType = .none
       textLabel?.font = .systemFont(ofSize: 13)

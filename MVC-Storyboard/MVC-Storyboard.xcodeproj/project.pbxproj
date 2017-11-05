@@ -14,6 +14,8 @@
 		5202C35F1F84307B00176419 /* GitHubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521DF9651F842C02009BE312 /* GitHubService.swift */; };
 		5202C3601F84307B00176419 /* UIColor+BaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DCE6361F842690000006A4 /* UIColor+BaseColor.swift */; };
 		5202C3621F84419D00176419 /* UIStoryboard+Instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202C3611F84419D00176419 /* UIStoryboard+Instantiate.swift */; };
+		5209DD071FAE22130035B8F1 /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5209DD051FAE22130035B8F1 /* Data+Decode.swift */; };
+		5209DD081FAE22130035B8F1 /* Cell+TableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5209DD061FAE22130035B8F1 /* Cell+TableViewCellType.swift */; };
 		529200691F88BAE400279275 /* ServiceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529200681F88BAE400279275 /* ServiceSetting.swift */; };
 		52C818BE1F811E3A0012F6CE /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C818BD1F811E3A0012F6CE /* Repository.swift */; };
 		52C818C21F811EB70012F6CE /* RepositoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C818C11F811EB70012F6CE /* RepositoriesTableViewCell.swift */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		5202C3611F84419D00176419 /* UIStoryboard+Instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Instantiate.swift"; sourceTree = "<group>"; };
+		5209DD051FAE22130035B8F1 /* Data+Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Decode.swift"; sourceTree = "<group>"; };
+		5209DD061FAE22130035B8F1 /* Cell+TableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+TableViewCellType.swift"; sourceTree = "<group>"; };
 		521DF9601F842BD9009BE312 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		521DF9611F842BEF009BE312 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		521DF9631F842BEF009BE312 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -94,8 +98,8 @@
 		52DCE6331F842670000006A4 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				521DF9641F842C02009BE312 /* ServiceResult.swift */,
 				521DF9651F842C02009BE312 /* GitHubService.swift */,
+				521DF9641F842C02009BE312 /* ServiceResult.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -112,6 +116,8 @@
 		52DCE6351F84267B000006A4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				5209DD061FAE22130035B8F1 /* Cell+TableViewCellType.swift */,
+				5209DD051FAE22130035B8F1 /* Data+Decode.swift */,
 				52DCE6361F842690000006A4 /* UIColor+BaseColor.swift */,
 				5202C3611F84419D00176419 /* UIStoryboard+Instantiate.swift */,
 			);
@@ -240,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5202C35A1F84307B00176419 /* BaseViewController.swift in Sources */,
+				5209DD081FAE22130035B8F1 /* Cell+TableViewCellType.swift in Sources */,
 				5202C35B1F84307B00176419 /* SettingTableViewCell.swift in Sources */,
 				5202C35D1F84307B00176419 /* SettingViewController.swift in Sources */,
 				5202C35E1F84307B00176419 /* ServiceResult.swift in Sources */,
@@ -247,6 +254,7 @@
 				5202C3621F84419D00176419 /* UIStoryboard+Instantiate.swift in Sources */,
 				5202C3601F84307B00176419 /* UIColor+BaseColor.swift in Sources */,
 				52C818C21F811EB70012F6CE /* RepositoriesTableViewCell.swift in Sources */,
+				5209DD071FAE22130035B8F1 /* Data+Decode.swift in Sources */,
 				52E9D9001F7EB0AF00424760 /* RepositoriesViewController.swift in Sources */,
 				52E9D8FE1F7EB0AF00424760 /* AppDelegate.swift in Sources */,
 				529200691F88BAE400279275 /* ServiceSetting.swift in Sources */,

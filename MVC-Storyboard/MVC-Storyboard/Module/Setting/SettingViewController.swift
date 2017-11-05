@@ -46,6 +46,14 @@ final class SettingViewController: BaseViewController {
 // MARK: - TableViewDelegate
 
 extension SettingViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else { return nil }
+    selectedIndexPaths
+      .filter { $0.section == indexPath.section }
+      .forEach { tableView.deselectRow(at: $0, animated: false) }
+    return indexPath
+  }
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == sectionHeaders.index(of: "\(Language.self)") {
       currentSetting.language = Language.allValues[indexPath.row]
@@ -55,17 +63,7 @@ extension SettingViewController: UITableViewDelegate {
       currentSetting.sortType = SortType.allValues[indexPath.row]
     }
   }
-  
-  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-    guard let selectedIndexPaths = tableView.indexPathsForSelectedRows else { return nil }
-    for selectedIndexPath in selectedIndexPaths {
-      if selectedIndexPath.section == indexPath.section {
-        tableView.deselectRow(at: selectedIndexPath, animated: false)
-      }
-    }
-    return indexPath
-  }
-  
+
   func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
     return nil
   }
@@ -88,7 +86,7 @@ extension SettingViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as! SettingTableViewCell
+    let cell = tableView.dequeue(SettingTableViewCell.self, for: indexPath)
     let title = sectionValues[indexPath.section][indexPath.row]
     cell.setTitleText(title.capitalized)
     

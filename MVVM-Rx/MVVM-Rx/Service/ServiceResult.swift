@@ -10,8 +10,6 @@ import Foundation
 
 enum ServiceError: Error {
   case unknown
-  case invalidResponse(_: URLResponse)
-  case requestFailed(response: HTTPURLResponse, data: Data?)
   case urlTransformFailed
-  case jsonDecodingFailed
+  case requestFailed(response: HTTPURLResponse, data: Data?)
 }

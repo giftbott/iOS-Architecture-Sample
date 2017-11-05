@@ -20,16 +20,12 @@ extension Reactive where Base: URLSession {
   func dataTask(request: URLRequest) -> Single<Data> {
     return Single.create(subscribe: { observer -> Disposable in
       let task = self.base.dataTask(with: request) { (data, response, error) in
-        guard let response = response, let data = data else {
+        guard let response = response as? HTTPURLResponse, let data = data else {
           observer(.error(error ?? ServiceError.unknown))
           return
         }
-        guard let httpResponse = response as? HTTPURLResponse else {
-          observer(.error(ServiceError.invalidResponse(response)))
-          return
-        }
-        guard 200..<400 ~= httpResponse.statusCode else {
-          observer(.error(ServiceError.requestFailed(response: httpResponse, data: data)))
+        guard 200..<400 ~= response.statusCode else {
+          observer(.error(ServiceError.requestFailed(response: response, data: data)))
           return
         }
         observer(.success(data))

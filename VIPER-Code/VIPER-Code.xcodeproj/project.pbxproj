@@ -34,6 +34,8 @@
 		5295B6BD1F8BE55100743434 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B6BC1F8BE55000743434 /* SettingTableViewCell.swift */; };
 		5295B6BF1F8BF48500743434 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B6BE1F8BF48500743434 /* BaseViewController.swift */; };
 		5295B6C31F8BFCFA00743434 /* BaseWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295B6C21F8BFCFA00743434 /* BaseWireframe.swift */; };
+		52E08BCC1FAE062F00D92494 /* Cell+TableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E08BCA1FAE062F00D92494 /* Cell+TableViewCellType.swift */; };
+		52E08BCD1FAE062F00D92494 /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E08BCB1FAE062F00D92494 /* Data+Decode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		5295B6BC1F8BE55000743434 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		5295B6BE1F8BF48500743434 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5295B6C21F8BFCFA00743434 /* BaseWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWireframe.swift; sourceTree = "<group>"; };
+		52E08BCA1FAE062F00D92494 /* Cell+TableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cell+TableViewCellType.swift"; sourceTree = "<group>"; };
+		52E08BCB1FAE062F00D92494 /* Data+Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Decode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,8 @@
 		5295B6951F8BE3C500743434 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				52E08BCA1FAE062F00D92494 /* Cell+TableViewCellType.swift */,
+				52E08BCB1FAE062F00D92494 /* Data+Decode.swift */,
 				5295B6A81F8BE4B300743434 /* UIColor+BaseColor.swift */,
 				5295B6A71F8BE4B300743434 /* UIView+LayoutAnchor.swift */,
 				5295B6A61F8BE4B300743434 /* UIView+SubView.swift */,
@@ -268,6 +274,7 @@
 				522690BB1F934D71000B6700 /* SettingInteractor.swift in Sources */,
 				5295B6B21F8BE4CB00743434 /* RepositoriesViewController.swift in Sources */,
 				522809251F8E89DF00E89EBA /* BasePresenter.swift in Sources */,
+				52E08BCC1FAE062F00D92494 /* Cell+TableViewCellType.swift in Sources */,
 				5295B6A91F8BE4B300743434 /* UIView+SubView.swift in Sources */,
 				5295B6AA1F8BE4B300743434 /* UIView+LayoutAnchor.swift in Sources */,
 				5295B6A51F8BE48E00743434 /* ServiceSetting.swift in Sources */,
@@ -280,6 +287,7 @@
 				5295B6AB1F8BE4B300743434 /* UIColor+BaseColor.swift in Sources */,
 				5295B6C31F8BFCFA00743434 /* BaseWireframe.swift in Sources */,
 				5295B6BD1F8BE55100743434 /* SettingTableViewCell.swift in Sources */,
+				52E08BCD1FAE062F00D92494 /* Data+Decode.swift in Sources */,
 				5295B6A11F8BE47500743434 /* GitHubService.swift in Sources */,
 				522690B61F934CD8000B6700 /* GitHubServiceType.swift in Sources */,
 				522690BE1F934D71000B6700 /* SettingWireframe.swift in Sources */,

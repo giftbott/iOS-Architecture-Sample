@@ -33,7 +33,7 @@ final class SettingView: BaseView<SettingViewController> {
     tableView.sectionFooterHeight = UI.tableViewFooterHeight
     tableView.separatorColor = tableView.backgroundColor
     tableView.allowsMultipleSelection = true
-    tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+    tableView.register(cell: SettingTableViewCell.self)
     addSubview(tableView)
   }
   
@@ -41,9 +41,8 @@ final class SettingView: BaseView<SettingViewController> {
     tableView.delegate = vc
     tableView.dataSource = vc
     
-    let saveBarButton = UIBarButtonItem(barButtonSystemItem: .save,
-                                        target: vc,
-                                        action: #selector(vc.saveCurrentSetting))
-    vc.navigationItem.rightBarButtonItem = saveBarButton
+    vc.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .save, target: vc, action: #selector(vc.saveCurrentSetting)
+    )
   }
 }

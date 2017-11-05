@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func setupAppWireframe() {
     window = UIWindow(frame: UIScreen.main.bounds)
-    let repositoriesView = RepositoriesWireframe.createModule(serviceSetting: ServiceSetting.decode())
+    let setting = ServiceSetting.decode()
+    let repositoriesView = RepositoriesWireframe.createModule(serviceSetting: setting)
     AppWireframe.shared.setupKeyWindow(window!, viewController: repositoriesView)
   }
 }

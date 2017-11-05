@@ -23,9 +23,11 @@
 		52BA4FCA1F84F25D005F4607 /* GitHubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FC81F84F25D005F4607 /* GitHubService.swift */; };
 		52BA4FCB1F84F25D005F4607 /* ServiceResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BA4FC91F84F25D005F4607 /* ServiceResult.swift */; };
 		52CAE8531F91977F0034A770 /* GitHubServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CAE8521F91977F0034A770 /* GitHubServiceType.swift */; };
+		52DE68811FAC90380069EA5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52DE687E1FAC90380069EA5F /* Assets.xcassets */; };
+		52DE68851FAC90520069EA5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52DE68831FAC90520069EA5F /* LaunchScreen.storyboard */; };
+		52DE68881FAC90710069EA5F /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DE68861FAC90700069EA5F /* Data+Decode.swift */; };
+		52DE68891FAC90710069EA5F /* Cell+TableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DE68871FAC90710069EA5F /* Cell+TableViewCellType.swift */; };
 		52E9D8C31F7BD22D00424760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9D8C21F7BD22D00424760 /* AppDelegate.swift */; };
-		52E9D8CA1F7BD22D00424760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52E9D8C91F7BD22D00424760 /* Assets.xcassets */; };
-		52E9D8CD1F7BD22D00424760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52E9D8CB1F7BD22D00424760 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,11 +47,13 @@
 		52BA4FC81F84F25D005F4607 /* GitHubService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GitHubService.swift; path = Service/GitHubService.swift; sourceTree = "<group>"; };
 		52BA4FC91F84F25D005F4607 /* ServiceResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceResult.swift; path = Service/ServiceResult.swift; sourceTree = "<group>"; };
 		52CAE8521F91977F0034A770 /* GitHubServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GitHubServiceType.swift; path = Service/GitHubServiceType.swift; sourceTree = "<group>"; };
+		52DE687E1FAC90380069EA5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		52DE687F1FAC90380069EA5F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		52DE68841FAC90520069EA5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		52DE68861FAC90700069EA5F /* Data+Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Data+Decode.swift"; path = "Utility/Data+Decode.swift"; sourceTree = "<group>"; };
+		52DE68871FAC90710069EA5F /* Cell+TableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cell+TableViewCellType.swift"; path = "Utility/Cell+TableViewCellType.swift"; sourceTree = "<group>"; };
 		52E9D8BF1F7BD22D00424760 /* MVC-Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVC-Code.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E9D8C21F7BD22D00424760 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		52E9D8C91F7BD22D00424760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		52E9D8CC1F7BD22D00424760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		52E9D8CE1F7BD22D00424760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 		52E0D31E1F81282100A9034F /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				52DE68871FAC90710069EA5F /* Cell+TableViewCellType.swift */,
+				52DE68861FAC90700069EA5F /* Data+Decode.swift */,
 				52BA4FC01F84F248005F4607 /* UIColor+BaseColor.swift */,
 				52BA4FC11F84F248005F4607 /* UIView+LayoutAnchor.swift */,
 				52BA4FC21F84F248005F4607 /* UIView+SubView.swift */,
@@ -133,9 +139,9 @@
 		52E9D8E31F7BD26600424760 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				52E9D8C91F7BD22D00424760 /* Assets.xcassets */,
-				52E9D8CB1F7BD22D00424760 /* LaunchScreen.storyboard */,
-				52E9D8CE1F7BD22D00424760 /* Info.plist */,
+				52DE687E1FAC90380069EA5F /* Assets.xcassets */,
+				52DE68831FAC90520069EA5F /* LaunchScreen.storyboard */,
+				52DE687F1FAC90380069EA5F /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -231,8 +237,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52E9D8CD1F7BD22D00424760 /* LaunchScreen.storyboard in Resources */,
-				52E9D8CA1F7BD22D00424760 /* Assets.xcassets in Resources */,
+				52DE68851FAC90520069EA5F /* LaunchScreen.storyboard in Resources */,
+				52DE68811FAC90380069EA5F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +256,7 @@
 				52BA4FC41F84F248005F4607 /* UIView+LayoutAnchor.swift in Sources */,
 				52BA4FB91F84F217005F4607 /* RepositoriesViewController.swift in Sources */,
 				52BA4FCB1F84F25D005F4607 /* ServiceResult.swift in Sources */,
+				52DE68881FAC90710069EA5F /* Data+Decode.swift in Sources */,
 				52BA4FBE1F84F223005F4607 /* SettingView.swift in Sources */,
 				52BA4FCA1F84F25D005F4607 /* GitHubService.swift in Sources */,
 				52BA4FBF1F84F223005F4607 /* SettingViewController.swift in Sources */,
@@ -258,6 +265,7 @@
 				52BA4FBD1F84F223005F4607 /* SettingTableViewCell.swift in Sources */,
 				52BA4FB21F84F209005F4607 /* BaseView.swift in Sources */,
 				52BA4FC31F84F248005F4607 /* UIColor+BaseColor.swift in Sources */,
+				52DE68891FAC90710069EA5F /* Cell+TableViewCellType.swift in Sources */,
 				529200671F88B67700279275 /* ServiceSetting.swift in Sources */,
 				52BA4FB71F84F217005F4607 /* RepositoriesTableViewCell.swift in Sources */,
 			);
@@ -266,10 +274,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		52E9D8CB1F7BD22D00424760 /* LaunchScreen.storyboard */ = {
+		52DE68831FAC90520069EA5F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				52E9D8CC1F7BD22D00424760 /* Base */,
+				52DE68841FAC90520069EA5F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -389,7 +397,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 36346V3588;
-				INFOPLIST_FILE = "MVC-Code/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MVC-Code/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.example;
@@ -404,7 +412,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 36346V3588;
-				INFOPLIST_FILE = "MVC-Code/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/MVC-Code/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kr.giftbot.example;
